@@ -3,7 +3,82 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".clickActivity">
+    android:layout_height="wrap_content"
+    tools:context=".clickActivity"
+    android:layout_marginTop="50dp"
+    android:layout_marginHorizontal="10dp"
+    app:layout_anchorGravity="center_vertical"
+    android:layout_gravity="center_horizontal">
+
+    <Button
+        android:id="@+id/btm_a"
+        android:layout_height="130dp"
+        android:text="A"
+        android:textSize="30sp"
+        app:layout_constraintRight_toLeftOf="@+id/btm_b"
+        app:layout_constraintLeft_toLeftOf="parent"
+        tools:ignore="MissingConstraints"
+        android:layout_width="0dp" />
+
+    <Button
+        android:id="@+id/btm_c"
+        android:layout_height="130dp"
+        android:text="C"
+        android:textSize="30sp"
+        app:layout_constraintLeft_toRightOf="@+id/btm_b"
+        app:layout_constraintRight_toRightOf="parent" android:layout_width="0dp"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/btm_b"
+        android:layout_height="130dp"
+        android:text="B"
+        android:textSize="30sp"
+        app:layout_constraintLeft_toRightOf="@+id/btm_a"
+        app:layout_constraintRight_toLeftOf="@id/btm_c"
+        android:layout_width="0dp"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/btm_d"
+        android:layout_height="130dp"
+        android:text="D"
+        android:textSize="30sp"
+        app:layout_constraintTop_toBottomOf="@id/btm_a"
+        app:layout_constraintRight_toLeftOf="@+id/btm_b"
+        app:layout_constraintLeft_toLeftOf="parent"
+        tools:ignore="MissingConstraints"
+        android:layout_width="0dp" />
+
+    <Button
+        android:id="@+id/btm_f"
+        android:layout_height="130dp"
+        android:text="F"
+        android:textSize="30sp"
+        app:layout_constraintTop_toBottomOf="@id/btm_a"
+        app:layout_constraintLeft_toRightOf="@+id/btm_b"
+        app:layout_constraintRight_toRightOf="parent" android:layout_width="0dp"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/btm_e"
+        android:layout_height="130dp"
+        android:text="E"
+        android:textSize="30sp"
+        app:layout_constraintTop_toBottomOf="@id/btm_a"
+        app:layout_constraintLeft_toRightOf="@+id/btm_a"
+        app:layout_constraintRight_toLeftOf="@id/btm_c"
+        android:layout_width="0dp"
+        tools:ignore="MissingConstraints" />
+    <TextView
+        android:id="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/btm_d"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="Pressed: -"
+        android:textColor="#3F51B5"
+        android:textSize="30sp"
+        android:gravity="center"
+        android:layout_height="80dp"
+        android:layout_width="match_parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

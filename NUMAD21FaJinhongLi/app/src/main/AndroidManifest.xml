@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NUMAD21FaJinhongLi">
         <activity
+            android:name=".clickActivity"
+            android:exported="true" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
