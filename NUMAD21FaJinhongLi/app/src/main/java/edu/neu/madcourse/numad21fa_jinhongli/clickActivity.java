@@ -20,5 +20,13 @@ public class clickActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_click);
+        textView = findViewById(R.id.textView);
+        A = findViewById(R.id.btm_a);
+        B = findViewById(R.id.btm_b);
+        C = findViewById(R.id.btm_c);
+        D = findViewById(R.id.btm_d);
+        E = findViewById(R.id.btm_e);
+        F = findViewById(R.id.btm_f);
+        //A.setOnTouchListener();
     }
 }

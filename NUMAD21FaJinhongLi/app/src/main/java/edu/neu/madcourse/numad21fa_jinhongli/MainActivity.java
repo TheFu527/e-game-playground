@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         });
         btm_clicky = findViewById(R.id.btm_clicky);
         //按钮按下触发操作
-        btm_about.setOnClickListener(new View.OnClickListener() {
+        btm_clicky.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent clicker = new Intent(MainActivity.this,clickActivity.class);

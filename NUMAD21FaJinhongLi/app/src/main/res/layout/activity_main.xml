@@ -18,21 +18,21 @@
         android:gravity="center"
         android:text="Hello World!"
         android:textColor="#3F51B5"
-        android:textSize="40sp" />
+        android:textSize="30sp" />
 
     <Button
         android:id="@+id/btm_about1"
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:textSize="30sp"
+        android:textSize="25sp"
         android:text="@string/about"/>
 
     <Button
         android:id="@+id/btm_clicky"
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:textSize="30sp"
-        android:text="Clicky Clicky"/>
+        android:textSize="20sp"
+        android:text="@string/clicky_clicky"/>
 
 
     <!--    <TextView-->

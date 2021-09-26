@@ -4,81 +4,91 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".clickActivity"
-    android:layout_marginTop="50dp"
-    android:layout_marginHorizontal="10dp"
-    app:layout_anchorGravity="center_vertical"
-    android:layout_gravity="center_horizontal">
+    android:layout_gravity="center_vertical"
+    android:layout_marginHorizontal="11dp"
+    tools:context=".clickActivity">
 
     <Button
         android:id="@+id/btm_a"
-        android:layout_height="130dp"
-        android:text="A"
+        android:layout_width="0dp"
+        android:layout_height="110dp"
+        android:text="@string/a"
         android:textSize="30sp"
-        app:layout_constraintRight_toLeftOf="@+id/btm_b"
         app:layout_constraintLeft_toLeftOf="parent"
-        tools:ignore="MissingConstraints"
-        android:layout_width="0dp" />
+        app:layout_constraintRight_toLeftOf="@+id/btm_b"
+        tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/btm_c"
-        android:layout_height="130dp"
-        android:text="C"
+        android:layout_width="0dp"
+        android:layout_height="110dp"
+        android:text="@string/c"
         android:textSize="30sp"
         app:layout_constraintLeft_toRightOf="@+id/btm_b"
-        app:layout_constraintRight_toRightOf="parent" android:layout_width="0dp"
+        app:layout_constraintRight_toRightOf="parent"
         tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/btm_b"
-        android:layout_height="130dp"
-        android:text="B"
+        android:layout_width="0dp"
+        android:layout_height="110dp"
+        android:text="@string/b"
         android:textSize="30sp"
         app:layout_constraintLeft_toRightOf="@+id/btm_a"
         app:layout_constraintRight_toLeftOf="@id/btm_c"
-        android:layout_width="0dp"
         tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/btm_d"
-        android:layout_height="130dp"
-        android:text="D"
+        android:layout_width="0dp"
+        android:layout_height="110dp"
+        android:text="@string/d"
         android:textSize="30sp"
-        app:layout_constraintTop_toBottomOf="@id/btm_a"
-        app:layout_constraintRight_toLeftOf="@+id/btm_b"
         app:layout_constraintLeft_toLeftOf="parent"
-        tools:ignore="MissingConstraints"
-        android:layout_width="0dp" />
+        app:layout_constraintRight_toLeftOf="@+id/btm_b"
+        app:layout_constraintTop_toBottomOf="@id/btm_a"
+        tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/btm_f"
-        android:layout_height="130dp"
-        android:text="F"
+        android:layout_width="0dp"
+        android:layout_height="110dp"
+        android:text="@string/f"
         android:textSize="30sp"
-        app:layout_constraintTop_toBottomOf="@id/btm_a"
         app:layout_constraintLeft_toRightOf="@+id/btm_b"
-        app:layout_constraintRight_toRightOf="parent" android:layout_width="0dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btm_a"
         tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/btm_e"
-        android:layout_height="130dp"
-        android:text="E"
+        android:layout_width="0dp"
+        android:layout_height="110dp"
+        android:text="@string/e"
         android:textSize="30sp"
-        app:layout_constraintTop_toBottomOf="@id/btm_a"
         app:layout_constraintLeft_toRightOf="@+id/btm_a"
         app:layout_constraintRight_toLeftOf="@id/btm_c"
-        android:layout_width="0dp"
+        app:layout_constraintTop_toBottomOf="@id/btm_a"
         tools:ignore="MissingConstraints" />
+
     <TextView
         android:id="@+id/textView"
-        app:layout_constraintTop_toBottomOf="@+id/btm_d"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:text="Pressed: -"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:gravity="center"
+        android:text="@string/pressed"
         android:textColor="#3F51B5"
         android:textSize="30sp"
-        android:gravity="center"
-        android:layout_height="80dp"
-        android:layout_width="match_parent"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btm_d"
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_editor_absoluteX="0dp" />
+
+<!--    <androidx.constraintlayout.widget.Guideline-->
+<!--        android:id="@+id/guideline2"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="vertical"-->
+<!--        app:layout_constraintGuide_begin="20dp"/>-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
