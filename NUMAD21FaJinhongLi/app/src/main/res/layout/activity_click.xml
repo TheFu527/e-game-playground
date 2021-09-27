@@ -3,9 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:layout_gravity="center_vertical"
     android:layout_marginHorizontal="11dp"
+    android:layout_marginTop="100dp"
+    android:id="@+id/clickact"
     tools:context=".clickActivity">
 
     <Button
@@ -80,11 +82,11 @@
         android:textColor="#3F51B5"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btm_d"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintTop_toBottomOf="@+id/btm_e"
+        app:layout_constraintVertical_bias="0.202"
         tools:layout_editor_absoluteX="0dp" />
 
-<!--    <androidx.constraintlayout.widget.Guideline-->
+    <!--    <androidx.constraintlayout.widget.Guideline-->
 <!--        android:id="@+id/guideline2"-->
 <!--        android:layout_width="wrap_content"-->
 <!--        android:layout_height="wrap_content"-->
