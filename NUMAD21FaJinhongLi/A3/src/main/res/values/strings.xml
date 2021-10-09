@@ -1,5 +1,5 @@
 <resources>
-<!--    <string name="app_name">NUMAD21Fa-JinhongLi</string>-->
+    <!--    <string name="app_name">NUMAD21Fa-JinhongLi</string>-->
     <string name="app_name">A3-JinhongLi</string>
     <string name="jinhongcs5520">Jinhongcs5520</string>
     <string name="jinhong_li">Jinhong Li</string>
@@ -13,4 +13,8 @@
     <string name="e">E</string>
     <string name="pressed">Pressed: -</string>
     <string name="clicky_clicky">Clicky Clicky</string>
+    <string name="title_activity_scrolling">ScrollingActivity</string>
+    <string name="item_name">Item name</string>
+    <string name="item_link">Link to enter</string>
+    <string name="action_settings">Settings</string>
 </resources>

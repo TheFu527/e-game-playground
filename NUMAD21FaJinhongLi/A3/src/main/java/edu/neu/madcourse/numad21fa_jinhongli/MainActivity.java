@@ -14,6 +14,7 @@ public class MainActivity extends AppCompatActivity {
     // 先对控件进行声明
     private Button btm_about;
     private Button btm_clicky;
+    private Button btm_link;
     private TextView textView;
     private TextView text1;
 
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "Jinhong Li, li.jinh@northeastern.edu", Toast.LENGTH_LONG).show();
             }
         });
+
         btm_clicky = findViewById(R.id.btm_clicky);
         //按钮按下触发操作
         btm_clicky.setOnClickListener(new View.OnClickListener() {
@@ -45,6 +47,15 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent clicker = new Intent(MainActivity.this,clickActivity.class);
                 startActivity(clicker);
+            }
+        });
+
+        btm_link = findViewById(R.id.btm_link);
+        btm_link.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent linkcollector = new Intent(MainActivity.this,linkCollector.class);
+                startActivity(linkcollector);
             }
         });
     }
