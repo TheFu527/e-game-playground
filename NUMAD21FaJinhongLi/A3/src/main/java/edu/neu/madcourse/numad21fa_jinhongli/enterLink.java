@@ -27,7 +27,7 @@ public class enterLink extends AppCompatActivity {
         URL = findViewById(R.id.URL_enter);
         Name = findViewById(R.id.name_enter);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.close_icon);
-        setTitle("Add Link");
+        setTitle("Name & URL");
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

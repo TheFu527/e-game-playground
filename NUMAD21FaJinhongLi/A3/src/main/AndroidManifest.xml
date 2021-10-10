@@ -10,9 +10,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NUMAD21FaJinhongLi">
         <activity
-            android:name=".webpage"
-            android:exported="true" />
-        <activity
             android:name=".enterLink"
             android:exported="true"
             android:parentActivityName=".linkCollector" />

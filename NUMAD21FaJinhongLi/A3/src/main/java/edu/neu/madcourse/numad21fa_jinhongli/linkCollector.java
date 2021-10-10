@@ -13,6 +13,8 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.BaseTransientBottomBar;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -47,31 +49,11 @@ public class linkCollector extends AppCompatActivity {
             public void onClick(View v) {
                 Intent Enterlink = new Intent(linkCollector.this,enterLink.class);
                 startActivityForResult(Enterlink,RequestCode);
-//                int pos = 0;
-//                addItem(pos);
             }
         });
-
-        //Specify what action a specific gesture performs, in this case swiping right or left deletes the entry
-//        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
-//            @Override
-//            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
-//                return false;
-//            }
-//
-//            @Override
-//            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-//                Toast.makeText(linkCollector.this, "Delete an item", Toast.LENGTH_SHORT).show();
-//                int position = viewHolder.getLayoutPosition();
-//                itemList.remove(position);
-//
-//                rviewAdapter.notifyItemRemoved(position);
-//
-//            }
-//        });
-//        itemTouchHelper.attachToRecyclerView(recyclerView);
     }
 
+    // 用于接收enterLink输入的数据
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -82,12 +64,19 @@ public class linkCollector extends AppCompatActivity {
 
             ItemCard newCard = new ItemCard(name, link);
             itemList.add(0, newCard);
-
-            Toast.makeText(this, "Link saved", Toast.LENGTH_SHORT).show();
+            rviewAdapter.notifyItemInserted(0);
+            Snackbar.make(addButton,"Add succeeded",Snackbar.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Link saved", Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(this, "Link not saved", Toast.LENGTH_SHORT).show();
+            Snackbar.make(addButton,"Add failed",Snackbar.LENGTH_SHORT).show();
+
         }
     }
+
+//    public void showSnackbar() {
+//        Snackbar snackbar = new Snackbar()
+//    }
+
     // Handling Orientation Changes on Android
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
@@ -98,17 +87,12 @@ public class linkCollector extends AppCompatActivity {
         // Need to generate unique key for each item
         // This is only a possible way to do, please find your own way to generate the key
         for (int i = 0; i < size; i++) {
-            // put image information id into instance
-            // outState.putInt(KEY_OF_INSTANCE + i + "0", itemList.get(i).getImageSource());
-            // put itemName information into instance
+            // put name information into instance
             outState.putString(KEY_OF_INSTANCE + i + "a", itemList.get(i).getItemName());
-            // put itemDesc information into instance
+            // put link information into instance
             outState.putString(KEY_OF_INSTANCE + i + "b", itemList.get(i).getItemLink());
-            // put isChecked information into instance
-            //outState.putBoolean(KEY_OF_INSTANCE + i + "3", itemList.get(i).getStatus());
         }
         super.onSaveInstanceState(outState);
-
     }
 
     private void init(Bundle savedInstanceState) {
@@ -125,32 +109,14 @@ public class linkCollector extends AppCompatActivity {
                 int size = savedInstanceState.getInt(NUMBER_OF_ITEMS);
                 // Retrieve keys we stored in the instance
                 for (int i = 0; i < size; i++) {
-                    // Integer imgId = savedInstanceState.getInt(KEY_OF_INSTANCE + i + "0");
                     String itemName = savedInstanceState.getString(KEY_OF_INSTANCE + i + "a");
                     String itemLink = savedInstanceState.getString(KEY_OF_INSTANCE + i + "b");
-                    //boolean isChecked = savedInstanceState.getBoolean(KEY_OF_INSTANCE + i + "3");
 
-                    // We need to make sure names such as "XXX(checked)" will not duplicate
-                    // Use a tricky way to solve this problem, not the best though
-//                    if (isChecked) {
-//                        itemName = itemName.substring(0, itemName.lastIndexOf("("));
-//                    }
                     ItemCard itemCard = new ItemCard(itemName, itemLink);
-
                     itemList.add(itemCard);
                 }
             }
         }
-        // The first time to opne this Activity
-//        else {
-//            ItemCard item1 = new ItemCard(R.drawable.pic_gmail_01, "Gmail", "Example description", false);
-//            ItemCard item2 = new ItemCard(R.drawable.pic_google_01, "Google", "Example description", false);
-//            ItemCard item3 = new ItemCard(R.drawable.pic_youtube_01, "Youtube", "Example description", false);
-//            itemList.add(item1);
-//            itemList.add(item2);
-//            itemList.add(item3);
-//        }
-
     }
 
     private void createRecyclerView() {
@@ -165,11 +131,11 @@ public class linkCollector extends AppCompatActivity {
         // assign clicklistener to adapter
         ItemClickListener itemClickListener = new ItemClickListener() {
             public void onItemClick(int position) {
-                //attributions bond to the item has been changed
-                itemList.get(position).onItemClick(position);
+                // 对列表中对应的行项进行点击操作
+                //itemList.get(position).onItemClick(position);
                 Intent Link = new Intent(Intent.ACTION_VIEW, Uri.parse(itemList.get(position).getItemLink()));
                 startActivity(Link);
-                rviewAdapter.notifyItemChanged(position);
+                //rviewAdapter.notifyItemChanged(position);
             }
 
         };
@@ -179,10 +145,4 @@ public class linkCollector extends AppCompatActivity {
         recyclerView.setLayoutManager(rLayoutManger);
     }
 
-//    private void addItem(int position) {
-//        itemList.add(position, new ItemCard("Name：", "URL: " + "Tap to enter"));
-//        Toast.makeText(linkCollector.this, "Add an link", Toast.LENGTH_SHORT).show();
-//
-//        rviewAdapter.notifyItemInserted(position);
-//    }
 }
