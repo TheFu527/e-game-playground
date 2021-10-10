@@ -16,6 +16,9 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -61,18 +64,31 @@ public class linkCollector extends AppCompatActivity {
         if (requestCode == RequestCode && resultCode == RESULT_OK) {
             String name = data.getStringExtra(enterLink.EXTRA_NAME);
             String link = data.getStringExtra(enterLink.EXTRA_LINK);
-
             ItemCard newCard = new ItemCard(name, link);
-            itemList.add(0, newCard);
-            rviewAdapter.notifyItemInserted(0);
-            Snackbar.make(addButton,"Add succeeded",Snackbar.LENGTH_SHORT).show();
+//            itemList.add(0, newCard);
+//            rviewAdapter.notifyItemInserted(0);
+            if (isValidURL(link) == false) {
+                Snackbar.make(addButton,"Invalid URL, please re-enter",Snackbar.LENGTH_SHORT).show();
+            } else {
+                itemList.add(0, newCard);
+                rviewAdapter.notifyItemInserted(0);
+                Snackbar.make(addButton, "Add succeeded", Snackbar.LENGTH_SHORT).show();
+            }
             //Toast.makeText(this, "Link saved", Toast.LENGTH_SHORT).show();
         } else {
             Snackbar.make(addButton,"Add failed",Snackbar.LENGTH_SHORT).show();
-
         }
     }
 
+    public boolean isValidURL(String url) {
+        try {
+            new URL(url).toURI();
+        } catch (MalformedURLException | URISyntaxException e) {
+            return false;
+        }
+
+        return true;
+    }
 //    public void showSnackbar() {
 //        Snackbar snackbar = new Snackbar()
 //    }
