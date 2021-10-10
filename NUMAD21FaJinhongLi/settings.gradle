@@ -7,4 +7,4 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "NUMAD21Fa-JinhongLi"
-include ':A3'
+include ':A4'
