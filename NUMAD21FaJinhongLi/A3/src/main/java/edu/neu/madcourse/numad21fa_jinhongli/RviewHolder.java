@@ -1,5 +1,6 @@
 package edu.neu.madcourse.numad21fa_jinhongli;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageView;
@@ -25,8 +26,9 @@ public class RviewHolder extends RecyclerView.ViewHolder {
                 if (listener != null) {
                     int position = getLayoutPosition();
                     if (position != RecyclerView.NO_POSITION) {
-                        itemName.setText("dianji");
                         listener.onItemClick(position);
+                        // itemName.setText("dianji");
+
                     }
                 }
             }

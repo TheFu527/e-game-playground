@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -30,6 +32,7 @@ public class linkCollector extends AppCompatActivity {
     private static final String KEY_OF_INSTANCE = "MatchingKey";
     private static final String NUMBER_OF_ITEMS = "Link NUMBERS";
 
+    public static final int RequestCode= 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +45,10 @@ public class linkCollector extends AppCompatActivity {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int pos = 0;
-                addItem(pos);
+                Intent Enterlink = new Intent(linkCollector.this,enterLink.class);
+                startActivityForResult(Enterlink,RequestCode);
+//                int pos = 0;
+//                addItem(pos);
             }
         });
 
@@ -67,6 +72,22 @@ public class linkCollector extends AppCompatActivity {
 //        itemTouchHelper.attachToRecyclerView(recyclerView);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == RequestCode && resultCode == RESULT_OK) {
+            String name = data.getStringExtra(enterLink.EXTRA_NAME);
+            String link = data.getStringExtra(enterLink.EXTRA_LINK);
+
+            ItemCard newCard = new ItemCard(name, link);
+            itemList.add(0, newCard);
+
+            Toast.makeText(this, "Link saved", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "Link not saved", Toast.LENGTH_SHORT).show();
+        }
+    }
     // Handling Orientation Changes on Android
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
@@ -141,11 +162,13 @@ public class linkCollector extends AppCompatActivity {
 
         rviewAdapter = new RviewAdapter(itemList);
         //ItemCard itemClickListener = new ItemCard() {
+        // assign clicklistener to adapter
         ItemClickListener itemClickListener = new ItemClickListener() {
             public void onItemClick(int position) {
                 //attributions bond to the item has been changed
                 itemList.get(position).onItemClick(position);
-
+                Intent Link = new Intent(Intent.ACTION_VIEW, Uri.parse(itemList.get(position).getItemLink()));
+                startActivity(Link);
                 rviewAdapter.notifyItemChanged(position);
             }
 
@@ -156,10 +179,10 @@ public class linkCollector extends AppCompatActivity {
         recyclerView.setLayoutManager(rLayoutManger);
     }
 
-    private void addItem(int position) {
-        itemList.add(position, new ItemCard("Name：", "URL: " + "Tap to enter"));
-        Toast.makeText(linkCollector.this, "Add an link", Toast.LENGTH_SHORT).show();
-
-        rviewAdapter.notifyItemInserted(position);
-    }
+//    private void addItem(int position) {
+//        itemList.add(position, new ItemCard("Name：", "URL: " + "Tap to enter"));
+//        Toast.makeText(linkCollector.this, "Add an link", Toast.LENGTH_SHORT).show();
+//
+//        rviewAdapter.notifyItemInserted(position);
+//    }
 }

@@ -1,5 +1,6 @@
 package edu.neu.madcourse.numad21fa_jinhongli;
 
+import android.content.Intent;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -29,9 +30,10 @@ public class ItemCard implements ItemClickListener{
 //        return isChecked;
 //    }
 
+    @Override
     public void onItemClick(int position) {
-        //isChecked = !isChecked;
-        // 打开网址
+        // isChecked = !isChecked;
+
     }
 
 }
