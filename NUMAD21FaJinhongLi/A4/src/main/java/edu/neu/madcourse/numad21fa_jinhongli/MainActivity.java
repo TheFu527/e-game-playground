@@ -59,5 +59,14 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(linkcollector);
             }
         });
+
+        btm_location = findViewById(R.id.btm_location);
+        btm_location.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent Location = new Intent(MainActivity.this,Locator.class);
+                startActivity(Location);
+            }
+        });
     }
 }
