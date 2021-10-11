@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="edu.neu.madcourse.numad21fa_jinhongli">
 
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher_ljh"
@@ -9,6 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_ljh_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.NUMAD21FaJinhongLi">
+        <activity
+            android:name=".Locator"
+            android:exported="true" />
         <activity
             android:name=".enterLink"
             android:exported="true"

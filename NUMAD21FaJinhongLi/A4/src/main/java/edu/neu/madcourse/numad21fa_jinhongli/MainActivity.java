@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
     private Button btm_about;
     private Button btm_clicky;
     private Button btm_link;
+    private Button btm_location;
     private TextView textView;
     private TextView text1;
 
