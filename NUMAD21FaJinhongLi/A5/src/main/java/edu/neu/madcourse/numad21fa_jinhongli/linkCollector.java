@@ -89,9 +89,6 @@ public class linkCollector extends AppCompatActivity {
 
         return true;
     }
-//    public void showSnackbar() {
-//        Snackbar snackbar = new Snackbar()
-//    }
 
     // Handling Orientation Changes on Android
     @Override

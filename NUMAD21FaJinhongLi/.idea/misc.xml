@@ -19,6 +19,11 @@
         <entry key="A3/src/main/res/menu/add_link.xml" value="0.196875" />
         <entry key="A4/src/main/res/layout/activity_locator.xml" value="0.165" />
         <entry key="A4/src/main/res/layout/activity_main.xml" value="0.165" />
+        <entry key="A5/src/main/res/layout/activity_currency_convert.xml" value="0.105078125" />
+        <entry key="A5/src/main/res/layout/activity_currency_converter.xml" value="0.1" />
+        <entry key="A5/src/main/res/layout/activity_get_inventory.xml" value="0.1" />
+        <entry key="A5/src/main/res/layout/activity_locator.xml" value="0.196875" />
+        <entry key="A5/src/main/res/layout/activity_main.xml" value="0.105078125" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.15104166666666666" />
         <entry key="app/src/main/res/drawable/ic_launcher_JH_background.xml" value="0.3005128205128205" />
         <entry key="app/src/main/res/drawable/ic_launcher_JH_foreground.xml" value="0.16979166666666667" />

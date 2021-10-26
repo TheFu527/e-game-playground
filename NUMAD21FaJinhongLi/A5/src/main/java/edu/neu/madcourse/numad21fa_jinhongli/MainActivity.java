@@ -69,4 +69,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    public void  currencyConverter(View v)
+    {
+        Intent Converter = new Intent(MainActivity.this,currencyConverter.class);
+        startActivity(Converter);
+
+    }
 }

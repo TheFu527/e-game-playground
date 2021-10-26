@@ -48,4 +48,12 @@
         android:textSize="20sp"
         android:text="Locate me" />
 
+    <Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:textSize="20sp"
+        android:text="Currency converter"
+        android:onClick="currencyConverter"/>
+
 </LinearLayout>
