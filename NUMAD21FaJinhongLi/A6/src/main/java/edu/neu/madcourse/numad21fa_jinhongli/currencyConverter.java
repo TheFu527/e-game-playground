@@ -129,7 +129,8 @@ public class currencyConverter extends AppCompatActivity {
         protected void onPostExecute(JSONObject jObject) {
             super.onPostExecute(jObject);
             try {
-                currencyView.setText(jObject.getString("quotes"));
+                String queryResult= jObject.getString("quotes").substring(1, jObject.getString("quotes").length() -1);
+                currencyView.setText(queryResult);
             } catch (JSONException e) {
                 currencyView.setText("Something went wrong!");
             }
