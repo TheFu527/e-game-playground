@@ -6,7 +6,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
@@ -18,21 +17,8 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
-//import java.text.DateFormat;
-//import java.text.SimpleDateFormat;
-//import java.util.Date;
-//
-//import org.apache.http.HttpEntity;
-//import org.apache.http.ParseException;
-//import org.apache.http.client.ClientProtocolException;
-//import org.apache.http.client.methods.CloseableHttpResponse;
-//import org.apache.http.client.methods.HttpGet;
-//import org.apache.http.impl.client.CloseableHttpClient;
-//import org.apache.http.impl.client.HttpClients;
-//import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
-//implementation 'org.apache.httpcomponents:httpcore:4.4.1'
 
 public class currencyConverter extends AppCompatActivity {
 
@@ -45,8 +31,6 @@ public class currencyConverter extends AppCompatActivity {
     private CheckBox EUR;
     private CheckBox GBP;
 
-    // this object is used for executing requests to the (REST) API
-    //static CloseableHttpClient httpClient = HttpClients.createDefault();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,7 +57,6 @@ public class currencyConverter extends AppCompatActivity {
         if (EUR.isChecked()){
             eur = "EUR";
         };
-        //String url = "http://api.currencylayer.com/live?access_key=bb38cab25bb0fd0d1404427375ff3f51&currencies=EUR,PLN,MXN&format=1";
         String url = (BASE_URL + ENDPOINT + "?access_key=" + ACCESS_KEY + "&currencies=" +
                 cny + gbp + eur + "&format=1");
         task.execute(url);
@@ -95,10 +78,8 @@ public class currencyConverter extends AppCompatActivity {
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
                 conn.setDoInput(true);
-
                 conn.connect();
 
-                // Read response.
                 InputStream inputStream = conn.getInputStream();
                 String resp = convertStreamToString(inputStream);
                 // JSONArray jArray = new JSONArray(resp);    // Use this if your web service returns an array of objects.  Arrays are in [ ] brackets.
