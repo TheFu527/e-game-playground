@@ -20,10 +20,11 @@
 
   <TextView
       android:id="@+id/currencyView"
-      android:layout_width="379dp"
-      android:layout_height="180dp"
+      android:layout_width="367dp"
+      android:layout_height="136dp"
       android:text="Currency Display"
-      android:textSize="26dp"
+      android:textSize="28dp"
+      android:shadowColor="@color/black"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
