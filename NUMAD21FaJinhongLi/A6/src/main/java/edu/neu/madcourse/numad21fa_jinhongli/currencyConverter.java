@@ -30,6 +30,7 @@ public class currencyConverter extends AppCompatActivity {
     private CheckBox CNY;
     private CheckBox EUR;
     private CheckBox GBP;
+    String queryResult = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,12 +109,14 @@ public class currencyConverter extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(JSONObject jObject) {
+            //String queryResult = "";
             super.onPostExecute(jObject);
             try {
-                String queryResult= jObject.getString("quotes").substring(1, jObject.getString("quotes").length() -1);
+                queryResult= jObject.getString("quotes").substring(1, jObject.getString("quotes").length() -1);
                 currencyView.setText(queryResult);
+                //currencyView.setText(jObject.getString("quotes"));
             } catch (JSONException e) {
-                currencyView.setText("Something went wrong!");
+                currencyView.setText(queryResult);
             }
 
         }
