@@ -1,4 +1,4 @@
-package edu.neu.madcourse.numad21fa.egameplayground;
+package edu.neu.madcourse.numad21fa.egameplaygound;
 
 import org.junit.Test;
 
