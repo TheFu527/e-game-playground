@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">EgamePlaygound</string>
+    <string name="title_activity_navigation">NavigationActivity</string>
+    <string name="title_events">Event News</string>
+    <string name="title_piazza">Piazza</string>
+    <string name="title_teamup">Team Up</string>
+    <string name="title_me">Me</string>
 </resources>
