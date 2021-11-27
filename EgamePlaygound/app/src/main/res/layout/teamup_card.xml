@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="2dp"
+    app:cardCornerRadius="5dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="5dp">
+
+        <ImageView
+            android:id="@+id/card_user_avatar_img"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            android:adjustViewBounds="false"
+            android:padding="3dp" />
+
+        <ImageView
+            android:id="@+id/card_location_icon"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/card_user_name_tv"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_toEndOf="@+id/card_user_avatar_img"
+            android:adjustViewBounds="false"
+            android:padding="1dp"
+            app:srcCompat="@drawable/ic_baseline_location_on_24" />
+
+        <ImageView
+            android:id="@+id/card_user_gender_icon"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="7dp"
+            android:layout_toEndOf="@+id/card_user_name_tv"
+            android:adjustViewBounds="false"
+            android:padding="1dp" />
+
+        <ImageView
+            android:id="@+id/card_user_level_icon"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="7dp"
+            android:layout_toEndOf="@+id/card_user_gender_icon"
+            android:adjustViewBounds="false"
+            android:padding="1dp" />
+
+        <TextView
+            android:id="@+id/card_user_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="7dp"
+            android:layout_toEndOf="@+id/card_user_avatar_img"
+            android:text="@string/card_user_name"
+            android:textColor="@android:color/black"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/card_user_location_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/card_user_name_tv"
+            android:layout_marginStart="1dp"
+            android:layout_marginTop="6dp"
+            android:layout_toEndOf="@+id/card_location_icon"
+            android:text="@string/card_location" />
+
+        <TextView
+            android:id="@+id/card_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/card_user_avatar_img"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="6dp"
+            android:textColor="@android:color/black"
+            android:textSize="15sp"
+            android:text="@string/card_description" />
+
+        <Button
+            android:id="@+id/card_contact_me"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/card_user_avatar_img"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            android:text="Contact Me"
+            android:textColor="@android:color/holo_purple" />
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

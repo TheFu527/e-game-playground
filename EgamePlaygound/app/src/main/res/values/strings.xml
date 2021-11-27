@@ -5,4 +5,8 @@
     <string name="title_piazza">Piazza</string>
     <string name="title_teamup">Team Up</string>
     <string name="title_me">Me</string>
+    <string name="card_location">Beijing</string>
+    <string name="card_user_name">Hao Fu</string>
+    <string name="card_description">We need a teammate.</string>
+
 </resources>
