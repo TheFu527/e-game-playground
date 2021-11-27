@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "358523946489",
+    "project_id": "egame-playground",
+    "storage_bucket": "egame-playground.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:358523946489:android:4d7380365aeecc4ff72928",
+        "android_client_info": {
+          "package_name": "edu.neu.madcourse.numad21fa.egameplaygound"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "358523946489-fl2enmf41b9m2dqn8u3bqili6bl6uc9u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCSCK38uLgkNlYkWQvr0pIw8MaBz4C9sIY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "358523946489-fl2enmf41b9m2dqn8u3bqili6bl6uc9u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
