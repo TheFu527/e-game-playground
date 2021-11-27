@@ -8,5 +8,6 @@
     <string name="card_location">Beijing</string>
     <string name="card_user_name">Hao Fu</string>
     <string name="card_description">We need a teammate.</string>
+    <string name="card_timestamp">timestamp</string>
 
 </resources>

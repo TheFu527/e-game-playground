@@ -69,7 +69,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/card_user_location_tv"
+            android:id="@+id/card_location_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/card_user_name_tv"
@@ -79,18 +79,29 @@
             android:text="@string/card_location" />
 
         <TextView
-            android:id="@+id/card_description"
+            android:id="@+id/card_description_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/card_user_avatar_img"
             android:layout_marginStart="5dp"
             android:layout_marginTop="6dp"
+            android:text="@string/card_description"
             android:textColor="@android:color/black"
-            android:textSize="15sp"
-            android:text="@string/card_description" />
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/card_timestamp_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/card_contact_me_button"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="6dp"
+            android:layout_toStartOf="@id/card_contact_me_button"
+            android:text="@string/card_timestamp"
+            android:textSize="15sp" />
 
         <Button
-            android:id="@+id/card_contact_me"
+            android:id="@+id/card_contact_me_button"
             style="?android:attr/borderlessButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
