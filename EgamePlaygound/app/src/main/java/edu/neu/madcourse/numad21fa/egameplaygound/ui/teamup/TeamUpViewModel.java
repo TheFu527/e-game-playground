@@ -40,7 +40,7 @@ public class TeamUpViewModel extends ViewModel {
     private void mockList() {
         UserInfoDTO user = new UserInfoDTO("uuid", "name",
                 "url", UserGenderEnum.MALE, UserLevelEnum.GOLD, "a@example.com");
-        TeamUpCard card = new TeamUpCard("uuid", user, "description", "timestamp");
+        TeamUpCard card = new TeamUpCard("uuid", user, "description", "timestamp", "Beijing");
         teamUpCardList = new ArrayList<>();
         teamUpCardList.add(card);
     }

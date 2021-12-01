@@ -46,8 +46,6 @@ public class TeamUpFragment extends Fragment {
         });
 
         rLayoutManger = new LinearLayoutManager(getContext());
-
-
         teamUpRecyclerView = binding.cardRecyclerView;
         adapter = new TeamUpRecyclerViewAdapter();
         teamUpRecyclerView.setAdapter(adapter);

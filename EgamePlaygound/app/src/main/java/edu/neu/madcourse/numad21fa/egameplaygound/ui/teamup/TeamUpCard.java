@@ -9,12 +9,14 @@ public class TeamUpCard {
     private final UserInfoDTO userInfo;
     private final String description;
     private final String timestamp;
+    private final String location;
 
-    public TeamUpCard(String uuid, UserInfoDTO userInfo, String description, String timestamp) {
+    public TeamUpCard(String uuid, UserInfoDTO userInfo, String description, String timestamp, String location) {
         this.uuid = uuid;
         this.userInfo = userInfo;
         this.description = description;
         this.timestamp = timestamp;
+        this.location = location;
     }
 
     public String getUuid() {
@@ -27,6 +29,10 @@ public class TeamUpCard {
 
     public String getTimestamp() {
         return timestamp;
+    }
+
+    public String getLocation() {
+        return location;
     }
 
     public String getUserName() {

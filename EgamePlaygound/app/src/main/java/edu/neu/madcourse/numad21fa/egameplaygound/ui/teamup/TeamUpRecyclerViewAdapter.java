@@ -44,6 +44,7 @@ public class TeamUpRecyclerViewAdapter extends RecyclerView.Adapter<TeamUpCardVi
 
         viewHolder.getUserName().setText(card.getUserName());
         viewHolder.getDescription().setText(card.getDescription());
+        viewHolder.getLocation().setText(card.getLocation());
     }
 
     // Return the size of your dataset (invoked by the layout manager)
