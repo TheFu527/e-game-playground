@@ -1,5 +1,7 @@
 package edu.neu.madcourse.numad21fa.egameplaygound.ui.teamup;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +13,10 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.List;
 
 import edu.neu.madcourse.numad21fa.egameplaygound.databinding.FragmentTeamupBinding;
 
@@ -18,6 +24,10 @@ public class TeamUpFragment extends Fragment {
 
     private TeamUpViewModel teamUpViewModel;
     private FragmentTeamupBinding binding;
+    private RecyclerView teamUpRecyclerView;
+    private TeamUpRecyclerViewAdapter adapter;
+    private RecyclerView.LayoutManager rLayoutManger;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -34,6 +44,23 @@ public class TeamUpFragment extends Fragment {
                 textView.setText(s);
             }
         });
+
+        rLayoutManger = new LinearLayoutManager(getContext());
+
+
+        teamUpRecyclerView = binding.cardRecyclerView;
+        adapter = new TeamUpRecyclerViewAdapter();
+        teamUpRecyclerView.setAdapter(adapter);
+        teamUpRecyclerView.setLayoutManager(rLayoutManger);
+
+
+        teamUpViewModel.getTeamUpCard().observe(getViewLifecycleOwner(), new Observer<List<TeamUpCard>>() {
+            @Override
+            public void onChanged(List<TeamUpCard> teamUpCardList) {
+                adapter.updateTeamUpCardList(teamUpCardList);
+            }
+        });
+
         return root;
     }
 

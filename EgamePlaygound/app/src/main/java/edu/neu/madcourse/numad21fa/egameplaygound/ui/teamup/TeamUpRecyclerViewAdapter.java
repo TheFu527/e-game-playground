@@ -1,5 +1,6 @@
 package edu.neu.madcourse.numad21fa.egameplaygound.ui.teamup;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,16 +8,17 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import edu.neu.madcourse.numad21fa.egameplaygound.R;
 
 public class TeamUpRecyclerViewAdapter extends RecyclerView.Adapter<TeamUpCardViewHolder> {
 
-    private final List<TeamUpCard> teamUpCardList;
+    private List<TeamUpCard> teamUpCardList;
 
-    public TeamUpRecyclerViewAdapter(List<TeamUpCard> teamUpCardList) {
-        this.teamUpCardList = teamUpCardList;
+    public TeamUpRecyclerViewAdapter() {
+        this.teamUpCardList = new ArrayList<>();
     }
 
     // Create new views (invoked by the layout manager)
@@ -37,6 +39,9 @@ public class TeamUpRecyclerViewAdapter extends RecyclerView.Adapter<TeamUpCardVi
         // contents of the view with that element
         // TODO(Hao Fu): set view
         TeamUpCard card = teamUpCardList.get(position);
+        Log.i("=========", String.format("name: %s", card.getUserName()));
+        Log.i("=========", String.format("description: %s", card.getDescription()));
+
         viewHolder.getUserName().setText(card.getUserName());
         viewHolder.getDescription().setText(card.getDescription());
     }
@@ -45,5 +50,11 @@ public class TeamUpRecyclerViewAdapter extends RecyclerView.Adapter<TeamUpCardVi
     @Override
     public int getItemCount() {
         return teamUpCardList.size();
+    }
+
+    public void updateTeamUpCardList(final List<TeamUpCard> teamUpCardList) {
+        this.teamUpCardList.clear();
+        this.teamUpCardList = teamUpCardList;
+        notifyDataSetChanged();
     }
 }
