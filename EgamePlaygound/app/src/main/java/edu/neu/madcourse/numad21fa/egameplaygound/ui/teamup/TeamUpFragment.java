@@ -19,6 +19,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import edu.neu.madcourse.numad21fa.egameplaygound.databinding.FragmentTeamupBinding;
+import edu.neu.madcourse.numad21fa.egameplaygound.manager.database.DatabaseManager;
+import edu.neu.madcourse.numad21fa.egameplaygound.manager.database.DatabaseManagerImpl;
+import edu.neu.madcourse.numad21fa.egameplaygound.model.dto.TeamUpCardDTO;
 
 public class TeamUpFragment extends Fragment {
 
@@ -27,10 +30,13 @@ public class TeamUpFragment extends Fragment {
     private RecyclerView teamUpRecyclerView;
     private TeamUpRecyclerViewAdapter adapter;
     private RecyclerView.LayoutManager rLayoutManger;
+    private DatabaseManager databaseManager;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+        databaseManager = DatabaseManagerImpl.getInstance();
+
         teamUpViewModel =
                 new ViewModelProvider(this).get(TeamUpViewModel.class);
 
@@ -51,6 +57,12 @@ public class TeamUpFragment extends Fragment {
         teamUpRecyclerView.setAdapter(adapter);
         teamUpRecyclerView.setLayoutManager(rLayoutManger);
 
+        databaseManager.getTeamUpCardList(this).observe(getViewLifecycleOwner(), new Observer<List<TeamUpCardDTO>>() {
+            @Override
+            public void onChanged(List<TeamUpCardDTO> teamUpCardDTOS) {
+                teamUpViewModel.updateTeamUpCardList(teamUpCardDTOS);
+            }
+        });
 
         teamUpViewModel.getTeamUpCard().observe(getViewLifecycleOwner(), new Observer<List<TeamUpCard>>() {
             @Override
