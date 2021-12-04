@@ -4,43 +4,84 @@ import edu.neu.madcourse.numad21fa.egameplaygound.constant.enums.user.UserGender
 import edu.neu.madcourse.numad21fa.egameplaygound.constant.enums.user.UserLevelEnum;
 
 public class UserInfoDTO {
-    private final String uuid;
-    private final String name;
-    private final String avatarURI;
-    private final UserGenderEnum gender;
-    private final UserLevelEnum level;
-    private final String email;
+    private String uuid;
+    private String name;
+    private String avatarURI;
+    private UserGenderEnum gender;
+    private UserLevelEnum level;
+    private String email;
+    private String location;
 
-    public UserInfoDTO(String uuid, String name, String avatarURI, UserGenderEnum gender, UserLevelEnum level, String email) {
-        this.uuid = uuid;
-        this.name = name;
-        this.avatarURI = avatarURI;
-        this.gender = gender;
-        this.level = level;
-        this.email = email;
+    public UserInfoDTO() {
+        this.uuid = "";
+        this.name = "";
+        this.avatarURI = "";
+        this.gender = UserGenderEnum.UNKNOWN;
+        this.level = UserLevelEnum.UNKNOWN;
+        this.email = "";
+        this.location = "";
     }
 
     public String getUuid() {
         return uuid;
     }
 
+    public UserInfoDTO setUuid(String uuid) {
+        this.uuid = uuid;
+        return this;
+    }
+
     public String getName() {
         return name;
+    }
+
+    public UserInfoDTO setName(String name) {
+        this.name = name;
+        return this;
     }
 
     public String getAvatarURI() {
         return avatarURI;
     }
 
+    public UserInfoDTO setAvatarURI(String avatarURI) {
+        this.avatarURI = avatarURI;
+        return this;
+    }
+
     public UserGenderEnum getGender() {
         return gender;
+    }
+
+    public UserInfoDTO setGender(UserGenderEnum gender) {
+        this.gender = gender;
+        return this;
     }
 
     public UserLevelEnum getLevel() {
         return level;
     }
 
+    public UserInfoDTO setLevel(UserLevelEnum level) {
+        this.level = level;
+        return this;
+    }
+
     public String getEmail() {
         return email;
+    }
+
+    public UserInfoDTO setEmail(String email) {
+        this.email = email;
+        return this;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public UserInfoDTO setLocation(String location) {
+        this.location = location;
+        return this;
     }
 }

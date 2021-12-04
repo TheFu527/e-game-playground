@@ -12,6 +12,9 @@ import androidx.navigation.ui.NavigationUI;
 
 import edu.neu.madcourse.numad21fa.egameplaygound.R;
 import edu.neu.madcourse.numad21fa.egameplaygound.databinding.ActivityNavigationBinding;
+import edu.neu.madcourse.numad21fa.egameplaygound.manager.database.DatabaseManager;
+import edu.neu.madcourse.numad21fa.egameplaygound.manager.database.DatabaseManagerImpl;
+import edu.neu.madcourse.numad21fa.egameplaygound.manager.database.DatabaseViewModel;
 
 public class NavigationActivity extends AppCompatActivity {
 
@@ -23,7 +26,6 @@ public class NavigationActivity extends AppCompatActivity {
 
         binding = ActivityNavigationBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
         BottomNavigationView navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.

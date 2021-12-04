@@ -5,18 +5,13 @@ import edu.neu.madcourse.numad21fa.egameplaygound.constant.enums.user.UserLevelE
 import edu.neu.madcourse.numad21fa.egameplaygound.model.dto.UserInfoDTO;
 
 public class TeamUpCard {
-    private final String uuid;
-    private final UserInfoDTO userInfo;
-    private final String description;
-    private final String timestamp;
-    private final String location;
+    private String uuid;
+    private UserInfoDTO userInfo;
+    private String description;
+    private String timestamp;
+    private String location;
 
-    public TeamUpCard(String uuid, UserInfoDTO userInfo, String description, String timestamp, String location) {
-        this.uuid = uuid;
-        this.userInfo = userInfo;
-        this.description = description;
-        this.timestamp = timestamp;
-        this.location = location;
+    public TeamUpCard() {
     }
 
     public String getUuid() {
@@ -57,5 +52,30 @@ public class TeamUpCard {
 
     public UserGenderEnum getUserGender() {
         return userInfo.getGender();
+    }
+
+    public TeamUpCard setUuid(String uuid) {
+        this.uuid = uuid;
+        return this;
+    }
+
+    public TeamUpCard setUserInfo(UserInfoDTO userInfo) {
+        this.userInfo = userInfo;
+        return this;
+    }
+
+    public TeamUpCard setDescription(String description) {
+        this.description = description;
+        return this;
+    }
+
+    public TeamUpCard setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
+        return this;
+    }
+
+    public TeamUpCard setLocation(String location) {
+        this.location = location;
+        return this;
     }
 }

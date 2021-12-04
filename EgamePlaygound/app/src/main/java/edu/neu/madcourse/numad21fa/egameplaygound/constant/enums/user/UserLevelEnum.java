@@ -4,4 +4,5 @@ public enum UserLevelEnum {
     SILVER,
     GOLD,
     MASTER,
+    UNKNOWN,
 }
