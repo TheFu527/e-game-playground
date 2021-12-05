@@ -2,10 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="edu.neu.madcourse.numad21fa.egameplaygound">
-
-<!--    <uses-sdk-->
-<!--        android:minSdkVersion="7"-->
-<!--        android:targetSdkVersion="16" />-->
+    <!-- <uses-sdk -->
+    <!-- android:minSdkVersion="7" -->
+    <!-- android:targetSdkVersion="16" /> -->
     <!-- <uses-permission android:name="android.permission.CAMERA" /> -->
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
@@ -16,11 +15,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- Always include this permission -->
-
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> <!-- Include only if your app benefits from precise location access. -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
-<!--    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />-->
 
     <application
         android:allowBackup="true"
@@ -30,6 +26,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.EgamePlaygound">
+        <activity
+            android:name=".ui.login.LoginActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.signup.SignupActivity"
+            android:exported="true" />
 
         <meta-data
             android:name="com.google.android.actions"
