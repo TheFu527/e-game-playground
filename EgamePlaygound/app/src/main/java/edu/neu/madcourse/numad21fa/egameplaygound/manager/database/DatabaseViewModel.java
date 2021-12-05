@@ -11,6 +11,7 @@ import com.google.firebase.database.DataSnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.neu.madcourse.numad21fa.egameplaygound.model.dto.ExampleDTO;
 import edu.neu.madcourse.numad21fa.egameplaygound.model.dto.TeamUpCardDTO;
 import edu.neu.madcourse.numad21fa.egameplaygound.model.dto.UserInfoDTO;
 
@@ -18,6 +19,10 @@ public class DatabaseViewModel extends ViewModel {
     private final LiveData<List<UserInfoDTO>> usersLiveData;
     private final LiveData<List<TeamUpCardDTO>> teamUpCardsLiveData;
     private final FirebaseQueryLiveData usersQueryLiveData;
+
+    private final LiveData<List<ExampleDTO>> examplesLiveData;
+
+
 
     public DatabaseViewModel() {
         super();
@@ -28,6 +33,10 @@ public class DatabaseViewModel extends ViewModel {
         teamUpCardsLiveData = Transformations.map(
                 new FirebaseQueryLiveData(DatabaseManagerImpl.getInstance().getTeamUpCardsRef()),
                 new TeamUpCardsDeserializer());
+        examplesLiveData = Transformations.map(
+                new FirebaseQueryLiveData(DatabaseManagerImpl.getInstance().getExamplesRef()),
+                new ExamplesDeserializer());
+
     }
 
     @NonNull
@@ -38,6 +47,11 @@ public class DatabaseViewModel extends ViewModel {
     @NonNull
     public LiveData<List<TeamUpCardDTO>> getTeamUpCardsLiveData() {
         return teamUpCardsLiveData;
+    }
+
+    @NonNull
+    public LiveData<List<ExampleDTO>> getExamplesLiveData() {
+        return examplesLiveData;
     }
 
     @NonNull
@@ -78,6 +92,17 @@ public class DatabaseViewModel extends ViewModel {
             List<TeamUpCardDTO> modelList= new ArrayList<>();
             for(DataSnapshot ds : dataSnapshot.getChildren()) {
                 modelList.add(ds.getValue(TeamUpCardDTO.class));
+            }
+            return modelList;
+        }
+    }
+
+    private static class ExamplesDeserializer implements Function<DataSnapshot, List<ExampleDTO>> {
+        @Override
+        public List<ExampleDTO> apply(DataSnapshot dataSnapshot) {
+            List<ExampleDTO> modelList= new ArrayList<>();
+            for(DataSnapshot ds : dataSnapshot.getChildren()) {
+                modelList.add(ds.getValue(ExampleDTO.class));
             }
             return modelList;
         }

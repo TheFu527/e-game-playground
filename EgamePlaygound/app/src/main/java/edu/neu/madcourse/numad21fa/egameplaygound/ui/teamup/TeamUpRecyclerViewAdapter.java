@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.neu.madcourse.numad21fa.egameplaygound.R;
+import edu.neu.madcourse.numad21fa.egameplaygound.model.dto.ExampleDTO;
 
 public class TeamUpRecyclerViewAdapter extends RecyclerView.Adapter<TeamUpCardViewHolder> {
 
@@ -57,5 +58,12 @@ public class TeamUpRecyclerViewAdapter extends RecyclerView.Adapter<TeamUpCardVi
         this.teamUpCardList.clear();
         this.teamUpCardList = teamUpCardList;
         notifyDataSetChanged();
+    }
+
+    public void updateExamplesList(final List<ExampleDTO> exampleDTOList) {
+        for (ExampleDTO e : exampleDTOList) {
+            Log.i("===========", String.format("name: %s", e.getName()));
+            Log.i("===========", String.format("uuid: %s", e.getUuid()));
+        }
     }
 }

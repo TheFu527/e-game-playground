@@ -21,6 +21,7 @@ import java.util.List;
 import edu.neu.madcourse.numad21fa.egameplaygound.databinding.FragmentTeamupBinding;
 import edu.neu.madcourse.numad21fa.egameplaygound.manager.database.DatabaseManager;
 import edu.neu.madcourse.numad21fa.egameplaygound.manager.database.DatabaseManagerImpl;
+import edu.neu.madcourse.numad21fa.egameplaygound.model.dto.ExampleDTO;
 import edu.neu.madcourse.numad21fa.egameplaygound.model.dto.TeamUpCardDTO;
 
 public class TeamUpFragment extends Fragment {
@@ -71,6 +72,12 @@ public class TeamUpFragment extends Fragment {
             }
         });
 
+        databaseManager.getExampleList(this).observe(getViewLifecycleOwner(), new Observer<List<ExampleDTO>>() {
+            @Override
+            public void onChanged(List<ExampleDTO> exampleDTOList) {
+                adapter.updateExamplesList(exampleDTOList);
+            }
+        });
         return root;
     }
 

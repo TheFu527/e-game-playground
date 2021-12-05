@@ -10,6 +10,7 @@ import edu.neu.madcourse.numad21fa.egameplaygound.constant.enums.user.UserGender
 import edu.neu.madcourse.numad21fa.egameplaygound.constant.enums.user.UserLevelEnum;
 import edu.neu.madcourse.numad21fa.egameplaygound.manager.database.DatabaseManager;
 import edu.neu.madcourse.numad21fa.egameplaygound.manager.database.DatabaseManagerImpl;
+import edu.neu.madcourse.numad21fa.egameplaygound.model.dto.ExampleDTO;
 import edu.neu.madcourse.numad21fa.egameplaygound.model.dto.TeamUpCardDTO;
 import edu.neu.madcourse.numad21fa.egameplaygound.model.dto.UserInfoDTO;
 
@@ -36,6 +37,9 @@ public class MainActivity extends AppCompatActivity {
                 .setLocation("beijing")
                 .setUuid("uuid-uuid");
         dbManager.insertTeamUpCard(teamUpCardDTO);
+
+        ExampleDTO exampleDTO = new ExampleDTO().setName("Hao Fu").setUuid("123-1dsf31r-sdfw3");
+        dbManager.insertExample(exampleDTO);
 
         Intent intent = new Intent(MainActivity.this, NavigationActivity.class);
         startActivity(intent);

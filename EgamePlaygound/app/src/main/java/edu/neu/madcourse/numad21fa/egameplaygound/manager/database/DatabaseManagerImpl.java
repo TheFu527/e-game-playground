@@ -9,9 +9,9 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
+import edu.neu.madcourse.numad21fa.egameplaygound.model.dto.ExampleDTO;
 import edu.neu.madcourse.numad21fa.egameplaygound.model.dto.TeamUpCardDTO;
 import edu.neu.madcourse.numad21fa.egameplaygound.model.dto.UserInfoDTO;
-import edu.neu.madcourse.numad21fa.egameplaygound.ui.teamup.TeamUpViewModel;
 
 public class DatabaseManagerImpl implements DatabaseManager {
     private static final DatabaseManagerImpl instance = new DatabaseManagerImpl();
@@ -19,6 +19,9 @@ public class DatabaseManagerImpl implements DatabaseManager {
             FirebaseDatabase.getInstance().getReference("/users");
     private static final DatabaseReference TEAM_UP_CARDS_REF =
             FirebaseDatabase.getInstance().getReference("/teamUpCards");
+
+    private static final DatabaseReference EXAMPLES_REF =
+            FirebaseDatabase.getInstance().getReference("/examples");
 
     private final FirebaseDatabase database;
 
@@ -41,6 +44,11 @@ public class DatabaseManagerImpl implements DatabaseManager {
     }
 
     @Override
+    public DatabaseReference getExamplesRef() {
+        return EXAMPLES_REF;
+    }
+
+    @Override
     public void insertUser(UserInfoDTO userInfo) {
         USERS_REF.child(userInfo.getUuid()).setValue(userInfo);
     }
@@ -51,6 +59,11 @@ public class DatabaseManagerImpl implements DatabaseManager {
     }
 
     @Override
+    public void insertExample(ExampleDTO exampleDTO) {
+        EXAMPLES_REF.child(exampleDTO.getUuid()).setValue(exampleDTO);
+    }
+
+    @Override
     public LiveData<List<TeamUpCardDTO>> getTeamUpCardList(ViewModelStoreOwner owner) {
         return new ViewModelProvider(owner).get(DatabaseViewModel.class).getTeamUpCardsLiveData();
     }
@@ -58,5 +71,10 @@ public class DatabaseManagerImpl implements DatabaseManager {
     @Override
     public LiveData<UserInfoDTO> getUserInfo(ViewModelStoreOwner owner, String uuid) {
         return new ViewModelProvider(owner).get(DatabaseViewModel.class).getUserInfoLiveData(uuid);
+    }
+
+    @Override
+    public LiveData<List<ExampleDTO>> getExampleList(ViewModelStoreOwner owner) {
+        return new ViewModelProvider(owner).get(DatabaseViewModel.class).getExamplesLiveData();
     }
 }
