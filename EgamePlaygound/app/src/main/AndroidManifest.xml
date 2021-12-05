@@ -3,9 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="edu.neu.madcourse.numad21fa.egameplaygound">
 
-    <uses-sdk
-        android:minSdkVersion="7"
-        android:targetSdkVersion="16" />
+<!--    <uses-sdk-->
+<!--        android:minSdkVersion="7"-->
+<!--        android:targetSdkVersion="16" />-->
     <!-- <uses-permission android:name="android.permission.CAMERA" /> -->
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
