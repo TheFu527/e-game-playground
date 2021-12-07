@@ -3,6 +3,7 @@ package edu.neu.madcourse.numad21fa.egameplaygound.ui.teamup;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +23,7 @@ import edu.neu.madcourse.numad21fa.egameplaygound.databinding.FragmentTeamupBind
 import edu.neu.madcourse.numad21fa.egameplaygound.manager.database.DatabaseManager;
 import edu.neu.madcourse.numad21fa.egameplaygound.manager.database.DatabaseManagerImpl;
 import edu.neu.madcourse.numad21fa.egameplaygound.model.dto.TeamUpCardDTO;
+import edu.neu.madcourse.numad21fa.egameplaygound.model.dto.UserInfoDTO;
 
 public class TeamUpFragment extends Fragment {
 
@@ -63,6 +65,15 @@ public class TeamUpFragment extends Fragment {
                 teamUpViewModel.updateTeamUpCardList(teamUpCardDTOS);
             }
         });
+
+//        databaseManager.getUserInfo(this, "uuid-uuid").observe(getViewLifecycleOwner(), new Observer<UserInfoDTO>() {
+//            @Override
+//            public void onChanged(UserInfoDTO userInfoDTO) {
+//                Log.i("=======+=", userInfoDTO.getName());
+//            }
+//        });
+
+
 
         teamUpViewModel.getTeamUpCard().observe(getViewLifecycleOwner(), new Observer<List<TeamUpCard>>() {
             @Override
