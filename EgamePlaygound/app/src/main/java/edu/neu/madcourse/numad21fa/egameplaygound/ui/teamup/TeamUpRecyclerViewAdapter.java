@@ -74,7 +74,9 @@ public class TeamUpRecyclerViewAdapter extends RecyclerView.Adapter<TeamUpCardVi
                 .loadImageIntoImageView(viewHolder.itemView.getContext(),
                         card.getUserAvatar(), viewHolder.getUserAvatar());
         viewHolder.getUserLevel().setImageResource(card.getUserLevel().getIcon());
+        viewHolder.getUserLevel().setColorFilter(card.getUserLevel().getColor());
         viewHolder.getUserGender().setImageResource(card.getUserGender().getIcon());
+        viewHolder.getUserGender().setColorFilter(card.getUserGender().getColor());
         viewHolder.getContactMe().setOnClickListener(v -> {
             Intent emailIntent = new Intent(Intent.ACTION_SEND);
             emailIntent.setDataAndType(Uri.parse("mailto:"), "text/plain");
