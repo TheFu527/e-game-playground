@@ -9,5 +9,12 @@
     <string name="card_user_name">Hao Fu</string>
     <string name="card_description">We need a teammate.</string>
     <string name="card_timestamp">timestamp</string>
+    <string name="card_user_name_pz">ingbol</string>
+    <string name="card_title_pz">title</string>
+    <string name="card_content_pz">content</string>
+    <string name="card_timestamp_pz">timestamp</string>
+
+
+
 
 </resources>

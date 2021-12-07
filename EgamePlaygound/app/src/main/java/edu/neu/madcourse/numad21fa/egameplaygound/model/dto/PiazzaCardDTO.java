@@ -2,8 +2,8 @@ package edu.neu.madcourse.numad21fa.egameplaygound.model.dto;
 
 public class PiazzaCardDTO {
     private String uuid;
+    private String title;
     private String content;
-    private Integer numOfLikes;
     private UserInfoDTO creatorUser;
     private String timestamp;
 
@@ -19,21 +19,21 @@ public class PiazzaCardDTO {
         return this;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public PiazzaCardDTO setTitle(String title) {
+        this.title = title;
+        return this;
+    }
+
     public String getContent() {
         return content;
     }
 
     public PiazzaCardDTO setContent(String content) {
         this.content = content;
-        return this;
-    }
-
-    public Integer getNumOfLikes() {
-        return numOfLikes;
-    }
-
-    public PiazzaCardDTO setNumOfLikes(Integer numOfLikes) {
-        this.numOfLikes = numOfLikes;
         return this;
     }
 

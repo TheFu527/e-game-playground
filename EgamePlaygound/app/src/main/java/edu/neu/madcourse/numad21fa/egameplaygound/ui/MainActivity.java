@@ -10,6 +10,7 @@ import edu.neu.madcourse.numad21fa.egameplaygound.constant.enums.user.UserGender
 import edu.neu.madcourse.numad21fa.egameplaygound.constant.enums.user.UserLevelEnum;
 import edu.neu.madcourse.numad21fa.egameplaygound.manager.database.DatabaseManager;
 import edu.neu.madcourse.numad21fa.egameplaygound.manager.database.DatabaseManagerImpl;
+import edu.neu.madcourse.numad21fa.egameplaygound.model.dto.PiazzaCardDTO;
 import edu.neu.madcourse.numad21fa.egameplaygound.model.dto.TeamUpCardDTO;
 import edu.neu.madcourse.numad21fa.egameplaygound.model.dto.UserInfoDTO;
 
@@ -36,6 +37,12 @@ public class MainActivity extends AppCompatActivity {
                 .setLocation("beijing")
                 .setUuid("uuid-uuid");
         dbManager.insertTeamUpCard(teamUpCardDTO);
+        PiazzaCardDTO piazzaCardDTO = new PiazzaCardDTO().setUuid("uuid-uuid")
+                .setTitle("Title")
+                .setContent("Content")
+                .setCreatorUser(user)
+                .setTimestamp("Timestamp");
+        dbManager.insertPiazzaCard(piazzaCardDTO);
 
         Intent intent = new Intent(MainActivity.this, NavigationActivity.class);
         startActivity(intent);
