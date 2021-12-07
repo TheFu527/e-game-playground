@@ -26,4 +26,11 @@ public class StorageManagerImpl implements StorageManager {
                 .load(imageRef)
                 .into(imageView);
     }
+
+    @Override
+    public void loadImageIntoImageView(Context context, String imageRef, ImageView imageView) {
+        Glide.with(context)
+                .load(imageRef)
+                .into(imageView);
+    }
 }
