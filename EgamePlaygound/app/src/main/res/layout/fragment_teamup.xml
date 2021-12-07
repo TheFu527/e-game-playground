@@ -41,7 +41,7 @@
         app:layout_constraintEnd_toStartOf="@+id/my_card_tv"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
+    <Button
         android:id="@+id/my_card_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -49,7 +49,9 @@
         android:text="My Card"
         app:layout_constraintBottom_toBottomOf="@+id/location_spinner"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/location_spinner" />
+        app:layout_constraintTop_toTopOf="@+id/location_spinner"
+        android:textColor="@android:color/holo_purple"
+        style="?android:attr/borderlessButtonStyle" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/card_recycler_view"
