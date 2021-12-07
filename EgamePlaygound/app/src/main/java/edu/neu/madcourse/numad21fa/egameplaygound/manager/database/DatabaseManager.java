@@ -16,6 +16,7 @@ public interface DatabaseManager {
     void insertUser(UserInfoDTO userInfo);
     void insertTeamUpCard(TeamUpCardDTO teamUpCard);
     LiveData<List<TeamUpCardDTO>> getTeamUpCardList(ViewModelStoreOwner owner);
+    LiveData<List<TeamUpCardDTO>> getTeamUpCardList(ViewModelStoreOwner owner, String uuid);
     LiveData<UserInfoDTO> getUserInfo(ViewModelStoreOwner owner, String uuid);
 
 }
