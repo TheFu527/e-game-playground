@@ -39,6 +39,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -56,6 +57,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.security.Timestamp;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -74,12 +76,15 @@ import edu.neu.madcourse.numad21fa.egameplaygound.manager.storage.StorageManager
 import edu.neu.madcourse.numad21fa.egameplaygound.model.dto.TeamUpCardDTO;
 import edu.neu.madcourse.numad21fa.egameplaygound.model.dto.UserInfoDTO;
 import edu.neu.madcourse.numad21fa.egameplaygound.ui.MainActivity;
+import edu.neu.madcourse.numad21fa.egameplaygound.ui.teamup.TeamUpCard;
+import edu.neu.madcourse.numad21fa.egameplaygound.ui.teamup.TeamUpFragment;
 
 public class MeFragment extends Fragment {
 
     private MeViewModel meViewModel;
     private FragmentMeBinding binding;
     private Button setlevel;
+    private  TextView teamupdesc;
     private String uname;
     String uuid;
     private ImageView meImage;
@@ -99,6 +104,8 @@ public class MeFragment extends Fragment {
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageRef = storage.getReference();
         StorageManager storageManager = StorageManagerImpl.getInstance();
+        databaseManager = DatabaseManagerImpl.getInstance();
+
         meViewModel =
                 new ViewModelProvider(this).get(MeViewModel.class);
 
@@ -166,6 +173,44 @@ public class MeFragment extends Fragment {
             }
         });
         Log.i("selected level:",levelSelected[0].toString());
+
+
+        //read newest teamup
+        databaseManager.getTeamUpCardList(this,uuid).observe(getViewLifecycleOwner(), new Observer<List<TeamUpCardDTO>>() {
+            @Override
+            public void onChanged(List<TeamUpCardDTO> teamUpCardDTOS) {
+                String max_time = "2010-03-01 00:00:00";
+                String Latest_des = "";
+                int flag = 0;
+                for (TeamUpCardDTO t : teamUpCardDTOS) {
+                    String tmp = t.getTimestamp();
+                    flag = 1;
+                    if (max_time.compareTo(tmp)<0) {
+                        max_time = tmp;
+                        Latest_des = t.getDescription();
+                    }
+                }
+
+                if(flag==1){
+                    teamupdesc = (TextView) binding.teamupDesc;
+                    teamupdesc.setText(" Description: "+Latest_des+"\n"+"Publish time:   "+max_time);
+                    //
+
+                    teamupdesc.setOnClickListener(new View.OnClickListener() {
+                        //为找到的button设置监听
+                        @Override
+                        //重写onClick函数
+                        public void onClick(View v) {
+                            Bundle myCardBundle = new Bundle();
+                            myCardBundle.putString("uuid", uuid);
+                            NavHostFragment.findNavController(MeFragment.this).navigate(R.id.navigation_user_teamup, myCardBundle);
+                        }
+                    });
+                }
+            }
+        });
+
+
 
 
 

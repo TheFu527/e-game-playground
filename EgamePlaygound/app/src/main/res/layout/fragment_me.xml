@@ -27,18 +27,34 @@ tools:context=".ui.me.MeFragment">
         android:layout_marginStart="16dp"
         android:layout_marginTop="104dp"
         android:text="username"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintStart_toEndOf="@+id/imageViewme"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/teamup_desc"
+        android:layout_width="360dp"
+        android:layout_height="67dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/common_google_signin_btn_icon_dark_normal_background"
+        android:onClick="onClick"
+        android:text=""
+        app:layout_constraintBottom_toTopOf="@+id/newestteamup"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/newestpiazza"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
         android:id="@+id/newestpiazza"
-        android:layout_width="232dp"
-        android:layout_height="56dp"
+        android:layout_width="189dp"
+        android:layout_height="45dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="76dp"
+        android:layout_marginTop="56dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Newest_Piazza"
+        android:text="Newest_Teamup"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/reset_level_spinner" />
 
@@ -47,7 +63,7 @@ tools:context=".ui.me.MeFragment">
         android:layout_width="232dp"
         android:layout_height="56dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="120dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Newest_Teamup"
@@ -56,8 +72,8 @@ tools:context=".ui.me.MeFragment">
 
     <Spinner
         android:id="@+id/reset_level_spinner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="126dp"
+        android:layout_height="52dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="212dp"
         android:entries="@array/user_level"
@@ -70,15 +86,16 @@ tools:context=".ui.me.MeFragment">
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="212dp"
+        android:background="@drawable/common_google_signin_btn_icon_dark_normal_background"
         android:onClick="onClick"
         android:text="Reset_level"
         app:layout_constraintBottom_toTopOf="@+id/newestpiazza"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.32"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/reset_level_spinner"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
         app:rippleColor="@color/white"
-        app:strokeColor="#1E2729" />
+        app:strokeColor="@color/white" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
