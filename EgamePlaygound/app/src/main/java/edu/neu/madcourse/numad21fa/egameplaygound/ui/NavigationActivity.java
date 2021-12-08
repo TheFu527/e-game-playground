@@ -8,6 +8,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -20,6 +21,7 @@ import edu.neu.madcourse.numad21fa.egameplaygound.R;
 import edu.neu.madcourse.numad21fa.egameplaygound.databinding.ActivityNavigationBinding;
 import edu.neu.madcourse.numad21fa.egameplaygound.manager.database.DatabaseManagerImpl;
 import edu.neu.madcourse.numad21fa.egameplaygound.model.dto.TeamUpCardDTO;
+import edu.neu.madcourse.numad21fa.egameplaygound.model.dto.UserInfoDTO;
 import edu.neu.madcourse.numad21fa.egameplaygound.ui.teamup.CreateTeamUpCardDialogFragment;
 
 public class NavigationActivity extends AppCompatActivity implements DialogFragmentListener {
@@ -51,15 +53,23 @@ public class NavigationActivity extends AppCompatActivity implements DialogFragm
         Dialog dialogView = dialog.getDialog();
         EditText descriptionEt = (EditText) dialogView.findViewById(R.id.description);
 
+
+
         DatabaseManagerImpl.getInstance()
                 .getUserInfo(this, dialog.getCreatorUserUuid())
-                .observe(this, userInfoDTO -> {
-                    DatabaseManagerImpl.getInstance()
-                            .insertTeamUpCard(new TeamUpCardDTO().setCreatorUser(userInfoDTO)
-                                    .setDescription(descriptionEt.getText().toString())
-                                    .setLocation(userInfoDTO.getLocation())
-                                    .setTimestamp(new Date(System.currentTimeMillis()).toString())
-                                    .setUuid(UUID.randomUUID().toString()));
+                .observe(this, new Observer<UserInfoDTO>() {
+                    @Override
+                    public void onChanged(UserInfoDTO userInfoDTO) {
+                        DatabaseManagerImpl.getInstance()
+                                .insertTeamUpCard(new TeamUpCardDTO().setCreatorUser(userInfoDTO)
+                                        .setDescription(descriptionEt.getText().toString())
+                                        .setLocation(userInfoDTO.getLocation())
+                                        .setTimestamp(new Date(System.currentTimeMillis()).toString())
+                                        .setUuid(UUID.randomUUID().toString()));
+                        DatabaseManagerImpl.getInstance()
+                                .getUserInfo(NavigationActivity.this, dialog.getCreatorUserUuid())
+                                .removeObserver(this);
+                    }
                 });
     }
 
