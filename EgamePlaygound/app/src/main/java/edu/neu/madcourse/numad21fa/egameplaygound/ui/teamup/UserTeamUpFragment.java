@@ -4,10 +4,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -16,11 +18,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import edu.neu.madcourse.numad21fa.egameplaygound.R;
 import edu.neu.madcourse.numad21fa.egameplaygound.databinding.FragmentUserTeamupBinding;
+import edu.neu.madcourse.numad21fa.egameplaygound.manager.authentication.AuthenticationImpl;
 import edu.neu.madcourse.numad21fa.egameplaygound.manager.database.DatabaseManager;
 import edu.neu.madcourse.numad21fa.egameplaygound.manager.database.DatabaseManagerImpl;
 import edu.neu.madcourse.numad21fa.egameplaygound.model.dto.TeamUpCardDTO;
@@ -85,12 +91,12 @@ public class UserTeamUpFragment extends Fragment {
         createCard.setOnClickListener(v -> {
             Bundle myCardBundle = new Bundle();
             myCardBundle.putString("uuid", getCurrentUserUuid());
-            // TODO(Hao FU): create card by dialog.
+            DialogFragment createTeamUpCardDialogFragment = CreateTeamUpCardDialogFragment.newInstance(getCurrentUserUuid());
+            createTeamUpCardDialogFragment.show(getActivity().getSupportFragmentManager(), "createTeamUpCard");
         });
     }
 
     private String getCurrentUserUuid() {
-        // TODO(Hao Fu): get real current user uuid by Zoe's api.
-        return "";
+        return AuthenticationImpl.getInstance().getUserID();
     }
 }

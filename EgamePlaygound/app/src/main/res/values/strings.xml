@@ -10,5 +10,8 @@
     <string name="card_user_name">Hao Fu</string>
     <string name="card_description">We need a teammate.</string>
     <string name="card_timestamp">timestamp</string>
+    <string name="create_teamup_card">Create Your Card</string>
+    <string name="post">Post</string>
+    <string name="cancel">Cancel</string>
 
 </resources>
