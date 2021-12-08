@@ -14,7 +14,6 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import java.util.Date;
 import java.util.UUID;
 
 import edu.neu.madcourse.numad21fa.egameplaygound.R;
