@@ -1,10 +1,11 @@
 package edu.neu.madcourse.numad21fa.egameplaygound.ui.teamup;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,13 +13,11 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-import edu.neu.madcourse.numad21fa.egameplaygound.R;
 import edu.neu.madcourse.numad21fa.egameplaygound.databinding.FragmentTeamupBinding;
 import edu.neu.madcourse.numad21fa.egameplaygound.manager.database.DatabaseManager;
 import edu.neu.madcourse.numad21fa.egameplaygound.manager.database.DatabaseManagerImpl;
@@ -32,8 +31,6 @@ public class TeamUpFragment extends Fragment {
     private TeamUpRecyclerViewAdapter adapter;
     private RecyclerView.LayoutManager rLayoutManger;
     private DatabaseManager databaseManager;
-    private Button myCard;
-
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -74,14 +71,6 @@ public class TeamUpFragment extends Fragment {
             }
         });
 
-        myCard = root.findViewById(R.id.my_card_button);
-        myCard.setOnClickListener(v -> {
-            Bundle myCardBundle = new Bundle();
-            // TODO(Hao Fu): get real uuid
-            myCardBundle.putString("uuid", "uuid-uuid");
-            NavHostFragment.findNavController(TeamUpFragment.this)
-                    .navigate(R.id.navigation_user_teamup, myCardBundle);
-        });
         return root;
     }
 

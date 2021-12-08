@@ -56,11 +56,6 @@ public class DatabaseManagerImpl implements DatabaseManager {
     }
 
     @Override
-    public LiveData<List<TeamUpCardDTO>> getTeamUpCardList(ViewModelStoreOwner owner, String uuid) {
-        return new ViewModelProvider(owner).get(DatabaseViewModel.class).getTeamUpCardsLiveData(uuid);
-    }
-
-    @Override
     public LiveData<UserInfoDTO> getUserInfo(ViewModelStoreOwner owner, String uuid) {
         return new ViewModelProvider(owner).get(DatabaseViewModel.class).getUserInfoLiveData(uuid);
     }

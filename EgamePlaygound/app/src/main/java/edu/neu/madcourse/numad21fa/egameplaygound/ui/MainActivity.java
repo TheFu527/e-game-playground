@@ -1,9 +1,24 @@
 package edu.neu.madcourse.numad21fa.egameplaygound.ui;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import java.net.URI;
+
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.ImageView;
+
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
+import java.net.URI;
+import java.net.URISyntaxException;
 
 import edu.neu.madcourse.numad21fa.egameplaygound.R;
 import edu.neu.madcourse.numad21fa.egameplaygound.constant.enums.user.UserGenderEnum;
@@ -12,6 +27,7 @@ import edu.neu.madcourse.numad21fa.egameplaygound.manager.database.DatabaseManag
 import edu.neu.madcourse.numad21fa.egameplaygound.manager.database.DatabaseManagerImpl;
 import edu.neu.madcourse.numad21fa.egameplaygound.model.dto.TeamUpCardDTO;
 import edu.neu.madcourse.numad21fa.egameplaygound.model.dto.UserInfoDTO;
+import edu.neu.madcourse.numad21fa.egameplaygound.ui.login.LoginActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,20 +46,18 @@ public class MainActivity extends AppCompatActivity {
                 .setUuid("uuid-uuid")
                 .setName("Hao Fu");
         dbManager.insertUser(user);
-
-        dbManager.insertTeamUpCard(new TeamUpCardDTO().setDescription("abcde")
+        TeamUpCardDTO teamUpCardDTO = new TeamUpCardDTO().setDescription("abcde")
                 .setTimestamp("time")
                 .setCreatorUser(user)
                 .setLocation("beijing")
-                .setUuid("uuid-uuid"));
-        dbManager.insertTeamUpCard(new TeamUpCardDTO().setDescription("that's cool")
-                .setTimestamp("time")
-                .setCreatorUser(user)
-                .setLocation("Jingbei")
-                .setUuid("uuid-uuid-uuid"));
+                .setUuid("uuid-uuid");
+        dbManager.insertTeamUpCard(teamUpCardDTO);
 
-        Intent intent = new Intent(MainActivity.this, NavigationActivity.class);
+
+        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
         startActivity(intent);
+
+
 
     }
 }
