@@ -20,6 +20,7 @@ import java.util.List;
 
 import edu.neu.madcourse.numad21fa.egameplaygound.R;
 import edu.neu.madcourse.numad21fa.egameplaygound.databinding.FragmentTeamupBinding;
+import edu.neu.madcourse.numad21fa.egameplaygound.manager.authentication.AuthenticationImpl;
 import edu.neu.madcourse.numad21fa.egameplaygound.manager.database.DatabaseManager;
 import edu.neu.madcourse.numad21fa.egameplaygound.manager.database.DatabaseManagerImpl;
 import edu.neu.madcourse.numad21fa.egameplaygound.model.dto.TeamUpCardDTO;
@@ -60,25 +61,14 @@ public class TeamUpFragment extends Fragment {
         teamUpRecyclerView.setAdapter(adapter);
         teamUpRecyclerView.setLayoutManager(rLayoutManger);
 
-        databaseManager.getTeamUpCardList(this).observe(getViewLifecycleOwner(), new Observer<List<TeamUpCardDTO>>() {
-            @Override
-            public void onChanged(List<TeamUpCardDTO> teamUpCardDTOS) {
-                teamUpViewModel.updateTeamUpCardList(teamUpCardDTOS);
-            }
-        });
+        databaseManager.getTeamUpCardList(this).observe(getViewLifecycleOwner(), teamUpCardDTOS -> teamUpViewModel.updateTeamUpCardList(teamUpCardDTOS));
 
-        teamUpViewModel.getTeamUpCard().observe(getViewLifecycleOwner(), new Observer<List<TeamUpCard>>() {
-            @Override
-            public void onChanged(List<TeamUpCard> teamUpCardList) {
-                adapter.updateTeamUpCardList(teamUpCardList);
-            }
-        });
+        teamUpViewModel.getTeamUpCard().observe(getViewLifecycleOwner(), teamUpCardList -> adapter.updateTeamUpCardList(teamUpCardList));
 
         myCard = root.findViewById(R.id.my_card_button);
         myCard.setOnClickListener(v -> {
             Bundle myCardBundle = new Bundle();
-            // TODO(Hao Fu): get real uuid
-            myCardBundle.putString("uuid", "uuid-uuid");
+            myCardBundle.putString("uuid", AuthenticationImpl.getInstance().getUserID());
             NavHostFragment.findNavController(TeamUpFragment.this)
                     .navigate(R.id.navigation_user_teamup, myCardBundle);
         });

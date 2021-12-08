@@ -1,8 +1,11 @@
 package edu.neu.madcourse.numad21fa.egameplaygound.ui;
 
+import android.app.Dialog;
 import android.os.Bundle;
+import android.widget.EditText;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
@@ -10,13 +13,19 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import java.util.Date;
+import java.util.UUID;
+
 import edu.neu.madcourse.numad21fa.egameplaygound.R;
 import edu.neu.madcourse.numad21fa.egameplaygound.databinding.ActivityNavigationBinding;
 import edu.neu.madcourse.numad21fa.egameplaygound.manager.database.DatabaseManager;
 import edu.neu.madcourse.numad21fa.egameplaygound.manager.database.DatabaseManagerImpl;
 import edu.neu.madcourse.numad21fa.egameplaygound.manager.database.DatabaseViewModel;
+import edu.neu.madcourse.numad21fa.egameplaygound.model.dto.TeamUpCardDTO;
+import edu.neu.madcourse.numad21fa.egameplaygound.ui.teamup.CreateTeamUpCardDialogFragment;
+import edu.neu.madcourse.numad21fa.egameplaygound.ui.teamup.CreateTeamUpCardDialogFragmentListener;
 
-public class NavigationActivity extends AppCompatActivity {
+public class NavigationActivity extends AppCompatActivity implements CreateTeamUpCardDialogFragmentListener {
 
     private ActivityNavigationBinding binding;
 
@@ -40,4 +49,26 @@ public class NavigationActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(binding.navView, navController);
     }
 
+    @Override
+    public void onDialogPositiveClick(CreateTeamUpCardDialogFragment dialog) {
+        Dialog dialogView = dialog.getDialog();
+        EditText descriptionEt = (EditText) dialogView.findViewById(R.id.description);
+
+        DatabaseManagerImpl.getInstance()
+                .getUserInfo(this, dialog.getCreatorUserUuid())
+                .observe(this, userInfoDTO -> {
+                    DatabaseManagerImpl.getInstance()
+                            .insertTeamUpCard(new TeamUpCardDTO().setCreatorUser(userInfoDTO)
+                                    .setDescription(descriptionEt.getText().toString())
+                                    .setLocation(userInfoDTO.getLocation())
+                                    .setTimestamp(new Date(System.currentTimeMillis()).toString())
+                                    .setUuid(UUID.randomUUID().toString()));
+                });
+    }
+
+    @Override
+    public void onDialogNegativeClick(CreateTeamUpCardDialogFragment dialog) {
+        Snackbar.make(findViewById(R.id.container), "Post Team Up Card Canceled", Snackbar.LENGTH_SHORT)
+                .show();
+    }
 }
