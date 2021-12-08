@@ -8,24 +8,24 @@ tools:context=".ui.me.MeFragment">
 
     <ImageView
         android:id="@+id/imageViewme"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="92dp"
+        android:layout_width="94dp"
+        android:layout_height="85dp"
+        android:layout_marginTop="84dp"
         android:adjustViewBounds="false"
-        android:onClick="onImageViewClick"
+        android:onClick="onClick"
         android:padding="3dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.025"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_launcher_background" />
 
     <TextView
         android:id="@+id/username_me"
-        android:layout_width="82dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="92dp"
+        android:layout_width="208dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="104dp"
         android:text="username"
         app:layout_constraintStart_toEndOf="@+id/imageViewme"
         app:layout_constraintTop_toTopOf="parent" />
@@ -34,20 +34,20 @@ tools:context=".ui.me.MeFragment">
         android:id="@+id/newestpiazza"
         android:layout_width="232dp"
         android:layout_height="56dp"
-        android:layout_marginStart="104dp"
-        android:layout_marginTop="160dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="76dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Newest_Piazza"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewme" />
+        app:layout_constraintTop_toBottomOf="@+id/reset_level_spinner" />
 
     <TextView
         android:id="@+id/newestteamup"
-        android:layout_width="244dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="136dp"
+        android:layout_width="232dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="100dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Newest_Teamup"
@@ -58,40 +58,27 @@ tools:context=".ui.me.MeFragment">
         android:id="@+id/reset_level_spinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="212dp"
+        android:entries="@array/user_level"
         android:minHeight="48dp"
-        app:layout_constraintBottom_toTopOf="@+id/reset_level"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.65"
-        app:layout_constraintStart_toEndOf="@+id/username_me"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.818" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/reset_level"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="164dp"
+        android:layout_marginTop="212dp"
+        android:onClick="onClick"
         android:text="Reset_level"
+        app:layout_constraintBottom_toTopOf="@+id/newestpiazza"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.942"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.32"
+        app:layout_constraintStart_toEndOf="@+id/reset_level_spinner"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
         app:rippleColor="@color/white"
         app:strokeColor="#1E2729" />
-
-    <Button
-        android:id="@+id/addpicture"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="20dp"
-        android:text="Button"
-        android:clickable="true"
-        app:layout_constraintBottom_toTopOf="@+id/newestpiazza"
-        app:layout_constraintEnd_toStartOf="@+id/reset_level"
-        app:layout_constraintHorizontal_bias="0.229"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewme"
-        app:layout_constraintVertical_bias="0.228" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
