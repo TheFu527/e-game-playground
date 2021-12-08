@@ -5,14 +5,14 @@ public class TeamUpCardDTO {
     private String location;
     private String description;
     private UserInfoDTO creatorUser;
-    private String timestamp;
+    private long timestamp;
 
     public TeamUpCardDTO() {
         uuid = "";
         location = "";
         description = "";
         creatorUser = new UserInfoDTO();
-        timestamp = "";
+        timestamp = 0;
     }
 
     public String getUuid() {
@@ -42,11 +42,11 @@ public class TeamUpCardDTO {
         return this;
     }
 
-    public String getTimestamp() {
+    public long getTimestamp() {
         return timestamp;
     }
 
-    public TeamUpCardDTO setTimestamp(String timestamp) {
+    public TeamUpCardDTO setTimestamp(long timestamp) {
         this.timestamp = timestamp;
         return this;
     }

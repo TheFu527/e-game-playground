@@ -16,6 +16,7 @@ import java.util.List;
 
 import edu.neu.madcourse.numad21fa.egameplaygound.R;
 import edu.neu.madcourse.numad21fa.egameplaygound.manager.storage.StorageManagerImpl;
+import edu.neu.madcourse.numad21fa.egameplaygound.model.dto.TeamUpCardDTO;
 
 public class TeamUpRecyclerViewAdapter extends RecyclerView.Adapter<TeamUpCardViewHolder> {
 
@@ -59,9 +60,22 @@ public class TeamUpRecyclerViewAdapter extends RecyclerView.Adapter<TeamUpCardVi
         return teamUpCardList.size();
     }
 
-    public void updateTeamUpCardList(final List<TeamUpCard> teamUpCardList) {
+//    public void updateTeamUpCardList(final List<TeamUpCard> teamUpCardList) {
+//        this.teamUpCardList.clear();
+//        this.teamUpCardList = teamUpCardList;
+//        notifyDataSetChanged();
+//    }
+
+    public void updateTeamUpCardList(final List<TeamUpCardDTO> teamUpCardDTOList) {
         this.teamUpCardList.clear();
-        this.teamUpCardList = teamUpCardList;
+        for (TeamUpCardDTO t : teamUpCardDTOList) {
+            teamUpCardList.add(new TeamUpCard()
+                    .setDescription(t.getDescription())
+                    .setTimestamp(t.getTimestamp())
+                    .setUserInfo(t.getCreatorUser())
+                    .setLocation(t.getLocation())
+                    .setUuid(t.getUuid()));
+        }
         notifyDataSetChanged();
     }
 

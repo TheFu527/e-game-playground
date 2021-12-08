@@ -8,36 +8,21 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
-
-import edu.neu.madcourse.numad21fa.egameplaygound.R;
 import edu.neu.madcourse.numad21fa.egameplaygound.databinding.FragmentUserTeamupBinding;
 import edu.neu.madcourse.numad21fa.egameplaygound.manager.authentication.AuthenticationImpl;
 import edu.neu.madcourse.numad21fa.egameplaygound.manager.database.DatabaseManager;
 import edu.neu.madcourse.numad21fa.egameplaygound.manager.database.DatabaseManagerImpl;
-import edu.neu.madcourse.numad21fa.egameplaygound.model.dto.TeamUpCardDTO;
-import edu.neu.madcourse.numad21fa.egameplaygound.model.dto.UserInfoDTO;
-import edu.neu.madcourse.numad21fa.egameplaygound.ui.teamup.TeamUpCard;
-import edu.neu.madcourse.numad21fa.egameplaygound.ui.teamup.TeamUpRecyclerViewAdapter;
-import edu.neu.madcourse.numad21fa.egameplaygound.ui.teamup.TeamUpViewModel;
 
 public class UserTeamUpFragment extends Fragment {
 
-    private TeamUpViewModel teamUpViewModel;
     private FragmentUserTeamupBinding binding;
     private RecyclerView teamUpRecyclerView;
     private TeamUpRecyclerViewAdapter adapter;
@@ -49,9 +34,6 @@ public class UserTeamUpFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         databaseManager = DatabaseManagerImpl.getInstance();
-
-        teamUpViewModel =
-                new ViewModelProvider(this).get(TeamUpViewModel.class);
 
         binding = FragmentUserTeamupBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
@@ -73,12 +55,14 @@ public class UserTeamUpFragment extends Fragment {
         adapter = new TeamUpRecyclerViewAdapter();
         teamUpRecyclerView.setAdapter(adapter);
         teamUpRecyclerView.setLayoutManager(rLayoutManger);
-        databaseManager.getTeamUpCardList(this, userUuidForThisCardList)
-                .observe(getViewLifecycleOwner(),
-                        teamUpCardDTOs -> teamUpViewModel.updateTeamUpCardList(teamUpCardDTOs));
+//        databaseManager.getTeamUpCardList(this, userUuidForThisCardList)
+//                .observe(getViewLifecycleOwner(),
+//                        teamUpCardDTOs -> teamUpViewModel.updateTeamUpCardList(teamUpCardDTOs));
 
-        teamUpViewModel.getTeamUpCard().observe(getViewLifecycleOwner(),
-                teamUpCardList -> adapter.updateTeamUpCardList(teamUpCardList));
+        databaseManager.getTeamUpCardList(this).observe(getViewLifecycleOwner(),
+                teamUpCardDTOS -> adapter.updateTeamUpCardList(teamUpCardDTOS));
+//        teamUpViewModel.getTeamUpCard().observe(getViewLifecycleOwner(),
+//                teamUpCardList -> adapter.updateTeamUpCardList(teamUpCardList));
     }
 
     private void initCreateCardFloatingActionButton() {
