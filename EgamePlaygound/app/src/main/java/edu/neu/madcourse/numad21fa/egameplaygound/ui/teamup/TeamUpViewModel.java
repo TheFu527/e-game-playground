@@ -25,6 +25,19 @@ public class TeamUpViewModel extends ViewModel {
         teamUpCardLiveData = new MutableLiveData<>();
         teamUpCardList = new ArrayList<>();
         mText.setValue("This is team up fragment");
+//        teamUpCardList.add(new TeamUpCard()
+//                .setDescription("t.getDescription()")
+//                .setTimestamp("t.getTimestamp()")
+//                .setUserInfo(new UserInfoDTO().setAvatarURI("uri")
+//                        .setEmail("example@abc.com")
+//                        .setLocation("Beijing")
+//                        .setUuid("uuid0uuid")
+//                        .setGender(UserGenderEnum.MALE)
+//                        .setLevel(UserLevelEnum.MASTER)
+//                        .setName("Hao Fu"))
+//                .setLocation("t.getLocation()")
+//                .setUuid("t.getUuid()"));
+//        teamUpCardLiveData.setValue(teamUpCardList);
     }
 
     public LiveData<String> getText() {
