@@ -11,8 +11,11 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
@@ -21,6 +24,7 @@ import edu.neu.madcourse.numad21fa.egameplaygound.databinding.FragmentUserTeamup
 import edu.neu.madcourse.numad21fa.egameplaygound.manager.database.DatabaseManager;
 import edu.neu.madcourse.numad21fa.egameplaygound.manager.database.DatabaseManagerImpl;
 import edu.neu.madcourse.numad21fa.egameplaygound.model.dto.TeamUpCardDTO;
+import edu.neu.madcourse.numad21fa.egameplaygound.model.dto.UserInfoDTO;
 import edu.neu.madcourse.numad21fa.egameplaygound.ui.teamup.TeamUpCard;
 import edu.neu.madcourse.numad21fa.egameplaygound.ui.teamup.TeamUpRecyclerViewAdapter;
 import edu.neu.madcourse.numad21fa.egameplaygound.ui.teamup.TeamUpViewModel;
@@ -33,6 +37,9 @@ public class UserTeamUpFragment extends Fragment {
     private TeamUpRecyclerViewAdapter adapter;
     private RecyclerView.LayoutManager rLayoutManger;
     private DatabaseManager databaseManager;
+    private FloatingActionButton createCard;
+    private String userUuidForThisCardList;
+    private UserInfoDTO currentUserInfo;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -43,20 +50,10 @@ public class UserTeamUpFragment extends Fragment {
 
         binding = FragmentUserTeamupBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-
-        rLayoutManger = new LinearLayoutManager(getContext());
-        teamUpRecyclerView = binding.userCardRecyclerView;
-        adapter = new TeamUpRecyclerViewAdapter();
-        teamUpRecyclerView.setAdapter(adapter);
-        teamUpRecyclerView.setLayoutManager(rLayoutManger);
-
-        databaseManager.getTeamUpCardList(this, requireArguments().getString("uuid"))
-                .observe(getViewLifecycleOwner(),
-                        teamUpCardDTOs -> teamUpViewModel.updateTeamUpCardList(teamUpCardDTOs));
-
-        teamUpViewModel.getTeamUpCard().observe(getViewLifecycleOwner(),
-                teamUpCardList -> adapter.updateTeamUpCardList(teamUpCardList));
-
+        userUuidForThisCardList = requireArguments().getString("uuid");
+        currentUserInfo = getCurrentUserInfo();
+        initCreateCardFloatingActionButton();
+        initRecyclerView();
         return root;
     }
 
@@ -64,5 +61,38 @@ public class UserTeamUpFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    private void initRecyclerView() {
+        rLayoutManger = new LinearLayoutManager(getContext());
+        teamUpRecyclerView = binding.userCardRecyclerView;
+        adapter = new TeamUpRecyclerViewAdapter();
+        teamUpRecyclerView.setAdapter(adapter);
+        teamUpRecyclerView.setLayoutManager(rLayoutManger);
+        databaseManager.getTeamUpCardList(this, userUuidForThisCardList)
+                .observe(getViewLifecycleOwner(),
+                        teamUpCardDTOs -> teamUpViewModel.updateTeamUpCardList(teamUpCardDTOs));
+
+        teamUpViewModel.getTeamUpCard().observe(getViewLifecycleOwner(),
+                teamUpCardList -> adapter.updateTeamUpCardList(teamUpCardList));
+    }
+
+    private void initCreateCardFloatingActionButton() {
+        createCard = binding.newCardFab;
+
+        if (!userUuidForThisCardList.equals(currentUserInfo.getUuid())) {
+            createCard.setVisibility(View.INVISIBLE);
+        }
+
+        createCard.setOnClickListener(v -> {
+            Bundle myCardBundle = new Bundle();
+            myCardBundle.putString("uuid", "uuid-uuid");
+            // TODO(Hao FU): create card by dialog.
+        });
+    }
+
+    private UserInfoDTO getCurrentUserInfo() {
+        // TODO(Hao Fu): get real current user bu Zoe's api.
+        return new UserInfoDTO();
     }
 }
