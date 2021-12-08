@@ -17,7 +17,6 @@ import com.google.firebase.storage.UploadTask;
 public class StorageManagerImpl implements StorageManager {
     private static final StorageManagerImpl instance = new StorageManagerImpl();
     private final FirebaseStorage storage;
-    private String file_name;
 
     private StorageManagerImpl() {
         storage = FirebaseStorage.getInstance();
@@ -35,23 +34,33 @@ public class StorageManagerImpl implements StorageManager {
                 .into(imageView);
     }
 
-    public void uploadImage(Context context,StorageReference imageRef,String file_name){
+    @Override
+    public void loadImageIntoImageView(Context context, String imageRef, ImageView imageView) {
+        Glide.with(context)
+                .load(imageRef)
+                .into(imageView);
+    }
+
+    public void uploadImage(StorageReference imageRef,String file_name) {
         UploadTask uploadTask = imageRef.putFile(Uri.parse(file_name));
         // Register observers to listen for when the download is done or if it fails
         uploadTask.addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception exception) {
                 // Handle unsuccessful uploads
-                Log.i("=========","upload image to storage failure!");
+                Log.i("=========", "upload image to storage failure!");
             }
         }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
                 // ...
-                Log.i("=========","upload image to storage success!");
+                Log.i("=========", "upload image to storage success!");
             }
         });
-
     }
 }
+
+
+
+

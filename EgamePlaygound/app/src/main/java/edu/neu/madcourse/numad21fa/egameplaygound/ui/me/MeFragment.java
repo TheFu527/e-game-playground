@@ -147,7 +147,7 @@ public class MeFragment extends Fragment {
                     public void onClick(View v){
                         DatabaseReference USERS_REF = FirebaseDatabase.getInstance().getReference("/users");
                         Log.i("level got:",USERS_REF.child(uuid).child("level").getKey());
-                        USERS_REF.child(uuid).child("level").setValue(UserLevelEnum.MASTER);
+                        USERS_REF.child(uuid).child("level").setValue(levelSelected[0]);
 //                        Map<String,Object> childUpdates = new HashMap<>();
 //                        Map<String, UserLevelEnum> postValues;
 //                        postValues = new HashMap<>();
@@ -263,7 +263,7 @@ public class MeFragment extends Fragment {
             //upload image to storage
             String StorageChild = String.valueOf(System.currentTimeMillis());
             Log.i("storage child:",StorageChild);
-            storageManager.uploadImage(getContext(), storageRef.child("user_image").child(StorageChild), String.valueOf(Uri.fromFile(currentImageFile)));
+            storageManager.uploadImage( storageRef.child("user_image").child(StorageChild), String.valueOf(Uri.fromFile(currentImageFile)));
 
             //update avatar uri to realtime database/users
             DatabaseReference USERS_REF = FirebaseDatabase.getInstance().getReference("/users");
