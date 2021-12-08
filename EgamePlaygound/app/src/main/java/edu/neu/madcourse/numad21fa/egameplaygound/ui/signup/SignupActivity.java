@@ -56,9 +56,9 @@ public class SignupActivity extends AppCompatActivity
     private Spinner gender;
     private String image_url = "gs://egame-playground.appspot.com/user_image/image1.jpeg";
 
-    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    private FirebaseAuth mAuth;
     final UserGenderEnum[] genderSelected = {UserGenderEnum.MALE};
-    final UserLevelEnum[] levelSelected = {UserLevelEnum.GOLD};
+    final UserLevelEnum[] levelSelected = {UserLevelEnum.SILVER};
     private String cityName = "";
     private DatabaseManager dbManager = DatabaseManagerImpl.getInstance();
 
@@ -75,6 +75,7 @@ public class SignupActivity extends AppCompatActivity
         location_value =  (TextView) findViewById(R.id.location_value);
         email = (TextView) findViewById(R.id.email);
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        mAuth = FirebaseAuth.getInstance();
 
 
         //get level
@@ -129,10 +130,11 @@ public class SignupActivity extends AppCompatActivity
             for (String enabledProvider : enabledProviders) {
                 stringBuffer.append(enabledProvider).append(" ");
 
-
                 if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                     requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, LOCATION_REQUEST_CODE);
-
+                    locationManager.requestSingleUpdate(enabledProvider,
+                            this,
+                            null);
                 } else {
                     locationManager.requestSingleUpdate(enabledProvider,
                             this,
