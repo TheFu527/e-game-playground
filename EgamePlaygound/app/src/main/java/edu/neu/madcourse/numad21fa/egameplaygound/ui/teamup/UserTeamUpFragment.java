@@ -34,7 +34,6 @@ public class UserTeamUpFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         databaseManager = DatabaseManagerImpl.getInstance();
-
         binding = FragmentUserTeamupBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         userUuidForThisCardList = requireArguments().getString("uuid");
@@ -55,14 +54,8 @@ public class UserTeamUpFragment extends Fragment {
         adapter = new TeamUpRecyclerViewAdapter();
         teamUpRecyclerView.setAdapter(adapter);
         teamUpRecyclerView.setLayoutManager(rLayoutManger);
-//        databaseManager.getTeamUpCardList(this, userUuidForThisCardList)
-//                .observe(getViewLifecycleOwner(),
-//                        teamUpCardDTOs -> teamUpViewModel.updateTeamUpCardList(teamUpCardDTOs));
-
         databaseManager.getTeamUpCardList(this).observe(getViewLifecycleOwner(),
                 teamUpCardDTOS -> adapter.updateTeamUpCardList(teamUpCardDTOS));
-//        teamUpViewModel.getTeamUpCard().observe(getViewLifecycleOwner(),
-//                teamUpCardList -> adapter.updateTeamUpCardList(teamUpCardList));
     }
 
     private void initCreateCardFloatingActionButton() {

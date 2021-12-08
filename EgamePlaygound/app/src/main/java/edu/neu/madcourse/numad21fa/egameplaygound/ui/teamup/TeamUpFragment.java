@@ -37,23 +37,9 @@ public class TeamUpFragment extends Fragment {
         binding = FragmentTeamupBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        rLayoutManger = new LinearLayoutManager(getContext());
-        teamUpRecyclerView = binding.cardRecyclerView;
-        adapter = new TeamUpRecyclerViewAdapter();
-        teamUpRecyclerView.setAdapter(adapter);
-        teamUpRecyclerView.setLayoutManager(rLayoutManger);
+        initRecyclerView();
+        initMyCardButton();
 
-        databaseManager.getTeamUpCardList(this).observe(getViewLifecycleOwner(),
-                teamUpCardDTOS -> adapter.updateTeamUpCardList(teamUpCardDTOS));
-
-
-        myCard = root.findViewById(R.id.my_card_button);
-        myCard.setOnClickListener(v -> {
-            Bundle myCardBundle = new Bundle();
-            myCardBundle.putString("uuid", AuthenticationImpl.getInstance().getUserID());
-            NavHostFragment.findNavController(TeamUpFragment.this)
-                    .navigate(R.id.navigation_user_teamup, myCardBundle);
-        });
         return root;
     }
 
@@ -61,5 +47,25 @@ public class TeamUpFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    private void initRecyclerView() {
+        rLayoutManger = new LinearLayoutManager(getContext());
+        teamUpRecyclerView = binding.cardRecyclerView;
+        adapter = new TeamUpRecyclerViewAdapter();
+        teamUpRecyclerView.setAdapter(adapter);
+        teamUpRecyclerView.setLayoutManager(rLayoutManger);
+        databaseManager.getTeamUpCardList(this).observe(getViewLifecycleOwner(),
+                teamUpCardDTOS -> adapter.updateTeamUpCardList(teamUpCardDTOS));
+    }
+
+    private void initMyCardButton() {
+        myCard = binding.myCardButton;
+        myCard.setOnClickListener(v -> {
+            Bundle myCardBundle = new Bundle();
+            myCardBundle.putString("uuid", AuthenticationImpl.getInstance().getUserID());
+            NavHostFragment.findNavController(TeamUpFragment.this)
+                    .navigate(R.id.navigation_user_teamup, myCardBundle);
+        });
     }
 }
