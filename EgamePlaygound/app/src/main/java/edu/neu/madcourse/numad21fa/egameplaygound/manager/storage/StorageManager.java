@@ -7,9 +7,13 @@ import com.google.firebase.storage.StorageReference;
 
 public interface StorageManager {
     void loadImageIntoImageView(Context context,
-                                  StorageReference imageRef,
-                                  ImageView imageView);
+                                StorageReference imageRef,
+                                ImageView imageView);
     void loadImageIntoImageView(Context context,
                                 String imageRef,
                                 ImageView imageView);
+    void uploadImage(
+                    StorageReference imageRef,
+                    String file_name);
 }
+
