@@ -51,6 +51,16 @@ public class DatabaseViewModel extends ViewModel {
     }
 
     @NonNull
+    public LiveData<List<TeamUpCardDTO>> getTeamUpCardsLiveData(String uuid) {
+        return Transformations.map(
+                new FirebaseQueryLiveData(DatabaseManagerImpl.getInstance()
+                        .getTeamUpCardsRef()
+                        .orderByChild("creatorUser/uuid")
+                        .equalTo(uuid)),
+                new TeamUpCardsDeserializer());
+    }
+
+    @NonNull
     public LiveData<UserInfoDTO> getUserInfoLiveData(String uuid) {
         return Transformations.map(
                 usersQueryLiveData,

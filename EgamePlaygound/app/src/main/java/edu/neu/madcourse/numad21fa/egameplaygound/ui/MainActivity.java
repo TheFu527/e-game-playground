@@ -31,18 +31,25 @@ public class MainActivity extends AppCompatActivity {
                 .setUuid("uuid-uuid")
                 .setName("Hao Fu");
         dbManager.insertUser(user);
-        TeamUpCardDTO teamUpCardDTO = new TeamUpCardDTO().setDescription("abcde")
+
+        dbManager.insertTeamUpCard(new TeamUpCardDTO().setDescription("abcde")
                 .setTimestamp("time")
                 .setCreatorUser(user)
                 .setLocation("beijing")
-                .setUuid("uuid-uuid");
-        dbManager.insertTeamUpCard(teamUpCardDTO);
+                .setUuid("uuid-uuid"));
+
         PiazzaCardDTO piazzaCardDTO = new PiazzaCardDTO().setUuid("uuid-uuid")
                 .setTitle("Title")
                 .setContent("Content")
                 .setCreatorUser(user)
                 .setTimestamp("Timestamp");
         dbManager.insertPiazzaCard(piazzaCardDTO);
+
+        dbManager.insertTeamUpCard(new TeamUpCardDTO().setDescription("that's cool")
+                .setTimestamp("time")
+                .setCreatorUser(user)
+                .setLocation("Jingbei")
+                .setUuid("uuid-uuid-uuid"));
 
         Intent intent = new Intent(MainActivity.this, NavigationActivity.class);
         startActivity(intent);

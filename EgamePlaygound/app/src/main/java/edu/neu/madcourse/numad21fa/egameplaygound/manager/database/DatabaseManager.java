@@ -20,6 +20,7 @@ public interface DatabaseManager {
     void insertPiazzaCard(PiazzaCardDTO piazzaCardDTO);
     LiveData<List<TeamUpCardDTO>> getTeamUpCardList(ViewModelStoreOwner owner);
     LiveData<List<PiazzaCardDTO>> getPiazzaCardList(ViewModelStoreOwner owner);
+    LiveData<List<TeamUpCardDTO>> getTeamUpCardList(ViewModelStoreOwner owner, String uuid);
     LiveData<UserInfoDTO> getUserInfo(ViewModelStoreOwner owner, String uuid);
 
 }

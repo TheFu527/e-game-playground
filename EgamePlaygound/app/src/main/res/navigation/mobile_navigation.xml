@@ -28,4 +28,10 @@
         android:name="edu.neu.madcourse.numad21fa.egameplaygound.ui.me.MeFragment"
         android:label="@string/title_me"
         tools:layout="@layout/fragment_me" />
+
+    <fragment
+        android:id="@+id/navigation_user_teamup"
+        android:name="edu.neu.madcourse.numad21fa.egameplaygound.ui.teamup.UserTeamUpFragment"
+        android:label="@string/title_user_teamup"
+        tools:layout="@layout/fragment_user_teamup" />
 </navigation>

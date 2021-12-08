@@ -7,6 +7,14 @@ public class TeamUpCardDTO {
     private UserInfoDTO creatorUser;
     private String timestamp;
 
+    public TeamUpCardDTO() {
+        uuid = "";
+        location = "";
+        description = "";
+        creatorUser = new UserInfoDTO();
+        timestamp = "";
+    }
+
     public String getUuid() {
         return uuid;
     }
