@@ -54,7 +54,7 @@ public class UserTeamUpFragment extends Fragment {
         adapter = new TeamUpRecyclerViewAdapter();
         teamUpRecyclerView.setAdapter(adapter);
         teamUpRecyclerView.setLayoutManager(rLayoutManger);
-        databaseManager.getTeamUpCardList(this).observe(getViewLifecycleOwner(),
+        databaseManager.getTeamUpCardList(this, getCurrentUserUuid()).observe(getViewLifecycleOwner(),
                 teamUpCardDTOS -> adapter.updateTeamUpCardList(teamUpCardDTOS));
     }
 
