@@ -39,7 +39,6 @@ public class UserTeamUpFragment extends Fragment {
     private DatabaseManager databaseManager;
     private FloatingActionButton createCard;
     private String userUuidForThisCardList;
-    private UserInfoDTO currentUserInfo;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -51,7 +50,6 @@ public class UserTeamUpFragment extends Fragment {
         binding = FragmentUserTeamupBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         userUuidForThisCardList = requireArguments().getString("uuid");
-        currentUserInfo = getCurrentUserInfo();
         initCreateCardFloatingActionButton();
         initRecyclerView();
         return root;
@@ -80,19 +78,19 @@ public class UserTeamUpFragment extends Fragment {
     private void initCreateCardFloatingActionButton() {
         createCard = binding.newCardFab;
 
-        if (!userUuidForThisCardList.equals(currentUserInfo.getUuid())) {
+        if (!userUuidForThisCardList.equals(getCurrentUserUuid())) {
             createCard.setVisibility(View.INVISIBLE);
         }
 
         createCard.setOnClickListener(v -> {
             Bundle myCardBundle = new Bundle();
-            myCardBundle.putString("uuid", "uuid-uuid");
+            myCardBundle.putString("uuid", getCurrentUserUuid());
             // TODO(Hao FU): create card by dialog.
         });
     }
 
-    private UserInfoDTO getCurrentUserInfo() {
-        // TODO(Hao Fu): get real current user bu Zoe's api.
-        return new UserInfoDTO();
+    private String getCurrentUserUuid() {
+        // TODO(Hao Fu): get real current user uuid by Zoe's api.
+        return "";
     }
 }
