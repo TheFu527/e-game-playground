@@ -61,6 +61,16 @@ public class DatabaseViewModel extends ViewModel {
     }
 
     @NonNull
+    public LiveData<List<PiazzaCardDTO>> getPiazzaCardsLiveData(String uuid) {
+        return Transformations.map(
+                new FirebaseQueryLiveData(DatabaseManagerImpl.getInstance()
+                        .getPiazzaCardsRef()
+                        .orderByChild("creatorUser/uuid")
+                        .equalTo(uuid)),
+                new PiazzaCardsDeserializer());
+    }
+
+    @NonNull
     public LiveData<UserInfoDTO> getUserInfoLiveData(String uuid) {
         return Transformations.map(
                 usersQueryLiveData,

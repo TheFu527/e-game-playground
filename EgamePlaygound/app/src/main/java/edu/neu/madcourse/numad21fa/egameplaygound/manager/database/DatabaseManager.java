@@ -22,5 +22,6 @@ public interface DatabaseManager {
     LiveData<List<PiazzaCardDTO>> getPiazzaCardList(ViewModelStoreOwner owner);
     LiveData<List<TeamUpCardDTO>> getTeamUpCardList(ViewModelStoreOwner owner, String uuid);
     LiveData<UserInfoDTO> getUserInfo(ViewModelStoreOwner owner, String uuid);
+    LiveData<List<PiazzaCardDTO>> getPiazzaCardList(ViewModelStoreOwner owner, String uuid);
 
 }

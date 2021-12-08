@@ -82,4 +82,9 @@ public class DatabaseManagerImpl implements DatabaseManager {
     public LiveData<List<PiazzaCardDTO>> getPiazzaCardList(ViewModelStoreOwner owner) {
         return new ViewModelProvider(owner).get(DatabaseViewModel.class).getPiazzaCardsLiveData();
     }
+
+    @Override
+    public LiveData<List<PiazzaCardDTO>> getPiazzaCardList(ViewModelStoreOwner owner, String uuid) {
+        return new ViewModelProvider(owner).get(DatabaseViewModel.class).getPiazzaCardsLiveData(uuid);
+    }
 }
