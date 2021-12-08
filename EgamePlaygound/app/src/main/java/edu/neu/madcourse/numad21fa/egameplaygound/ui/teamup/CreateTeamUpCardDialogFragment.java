@@ -2,27 +2,17 @@ package edu.neu.madcourse.numad21fa.egameplaygound.ui.teamup;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 
-import java.util.Date;
-import java.util.UUID;
-
 import edu.neu.madcourse.numad21fa.egameplaygound.R;
-import edu.neu.madcourse.numad21fa.egameplaygound.manager.database.DatabaseManagerImpl;
-import edu.neu.madcourse.numad21fa.egameplaygound.model.dto.TeamUpCardDTO;
-import edu.neu.madcourse.numad21fa.egameplaygound.model.dto.UserInfoDTO;
+import edu.neu.madcourse.numad21fa.egameplaygound.ui.DialogFragmentListener;
 
 public class CreateTeamUpCardDialogFragment extends DialogFragment {
-    private CreateTeamUpCardDialogFragmentListener listener;
+    private DialogFragmentListener listener;
 
     /**
      * Create a new instance of MyDialogFragment, providing "num"
@@ -47,10 +37,10 @@ public class CreateTeamUpCardDialogFragment extends DialogFragment {
         builder.setMessage(R.string.create_teamup_card)
                 .setView(inflater.inflate(R.layout.create_teamup_card_dialog, null))
                 .setPositiveButton(R.string.post, (dialog, id) -> {
-                    listener.onDialogPositiveClick(CreateTeamUpCardDialogFragment.this);
+                    listener.onCreateTeamUpCardDialogPositiveClick(CreateTeamUpCardDialogFragment.this);
                 })
                 .setNegativeButton(R.string.cancel, (dialog, id) -> {
-                    listener.onDialogNegativeClick(CreateTeamUpCardDialogFragment.this);
+                    listener.onCreateTeamUpCardDialogNegativeClick(CreateTeamUpCardDialogFragment.this);
                 });
 
         return builder.create();
@@ -62,7 +52,7 @@ public class CreateTeamUpCardDialogFragment extends DialogFragment {
         // Verify that the host activity implements the callback interface
         try {
             // Instantiate the NoticeDialogListener so we can send events to the host
-            listener = (CreateTeamUpCardDialogFragmentListener) context;
+            listener = (DialogFragmentListener) context;
         } catch (ClassCastException e) {
             // The activity doesn't implement the interface, throw exception
             throw new ClassCastException("Must implement CreateTeamUpCardDialogFragmentListener");

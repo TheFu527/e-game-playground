@@ -18,14 +18,11 @@ import java.util.UUID;
 
 import edu.neu.madcourse.numad21fa.egameplaygound.R;
 import edu.neu.madcourse.numad21fa.egameplaygound.databinding.ActivityNavigationBinding;
-import edu.neu.madcourse.numad21fa.egameplaygound.manager.database.DatabaseManager;
 import edu.neu.madcourse.numad21fa.egameplaygound.manager.database.DatabaseManagerImpl;
-import edu.neu.madcourse.numad21fa.egameplaygound.manager.database.DatabaseViewModel;
 import edu.neu.madcourse.numad21fa.egameplaygound.model.dto.TeamUpCardDTO;
 import edu.neu.madcourse.numad21fa.egameplaygound.ui.teamup.CreateTeamUpCardDialogFragment;
-import edu.neu.madcourse.numad21fa.egameplaygound.ui.teamup.CreateTeamUpCardDialogFragmentListener;
 
-public class NavigationActivity extends AppCompatActivity implements CreateTeamUpCardDialogFragmentListener {
+public class NavigationActivity extends AppCompatActivity implements DialogFragmentListener {
 
     private ActivityNavigationBinding binding;
 
@@ -50,7 +47,7 @@ public class NavigationActivity extends AppCompatActivity implements CreateTeamU
     }
 
     @Override
-    public void onDialogPositiveClick(CreateTeamUpCardDialogFragment dialog) {
+    public void onCreateTeamUpCardDialogPositiveClick(CreateTeamUpCardDialogFragment dialog) {
         Dialog dialogView = dialog.getDialog();
         EditText descriptionEt = (EditText) dialogView.findViewById(R.id.description);
 
@@ -67,7 +64,7 @@ public class NavigationActivity extends AppCompatActivity implements CreateTeamU
     }
 
     @Override
-    public void onDialogNegativeClick(CreateTeamUpCardDialogFragment dialog) {
+    public void onCreateTeamUpCardDialogNegativeClick(CreateTeamUpCardDialogFragment dialog) {
         Snackbar.make(findViewById(R.id.container), "Post Team Up Card Canceled", Snackbar.LENGTH_SHORT)
                 .show();
     }
