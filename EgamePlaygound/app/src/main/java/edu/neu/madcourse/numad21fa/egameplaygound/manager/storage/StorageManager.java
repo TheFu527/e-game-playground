@@ -9,4 +9,7 @@ public interface StorageManager {
     void loadImageIntoImageView(Context context,
                                   StorageReference imageRef,
                                   ImageView imageView);
+    void uploadImage(Context context,
+                     StorageReference imageRef,
+                     String file_name);
 }
