@@ -181,17 +181,17 @@ public class MeFragment extends Fragment {
             public void onChanged(List<TeamUpCardDTO> teamUpCardDTOS) {
                 String max_time = "2010-03-01 00:00:00";
                 String Latest_des = "";
-                int flag = 0;
+                int flag[] = {0};
                 for (TeamUpCardDTO t : teamUpCardDTOS) {
                     String tmp = t.getTimestamp();
-                    flag = 1;
+                    flag[0] = 1;
                     if (max_time.compareTo(tmp)<0) {
                         max_time = tmp;
                         Latest_des = t.getDescription();
                     }
                 }
 
-                if(flag==1){
+                if(flag[0]==1){
                     teamupdesc = (TextView) binding.teamupDesc;
                     teamupdesc.setText(" Description: "+Latest_des+"\n"+"Publish time:   "+max_time);
                     //
@@ -201,20 +201,41 @@ public class MeFragment extends Fragment {
                         @Override
                         //重写onClick函数
                         public void onClick(View v) {
-                            Bundle myCardBundle = new Bundle();
-                            myCardBundle.putString("uuid", uuid);
-                            NavHostFragment.findNavController(MeFragment.this).navigate(R.id.navigation_user_teamup, myCardBundle);
+                            if(flag[0]==1){
+                                Log.i("flag value:",String.valueOf(flag[0]));
+                                Bundle myCardBundle = new Bundle();
+                                myCardBundle.putString("uuid", uuid);
+                                NavHostFragment.findNavController(MeFragment.this).navigate(R.id.navigation_user_teamup, myCardBundle);
+                            }
+                            else {
+                                Toast.makeText(getContext(),"No teamup card till now!",Toast.LENGTH_SHORT).show();
+                            }
+
                         }
                     });
                 }
             }
         });
+        teamupdesc = (TextView) binding.teamupDesc;
+        teamupdesc.setOnClickListener(new View.OnClickListener() {
+            //为找到的button设置监听
+            @Override
+            //重写onClick函数
+            public void onClick(View v) {
+                }
+        });
 
 
-
-
-
-
+        //update user image
+        meImage = (ImageView) binding.imageViewme;
+        databaseManager.getUserInfo(this,uuid).observe(getViewLifecycleOwner(), new Observer<UserInfoDTO>() {
+            @Override
+            public void onChanged(UserInfoDTO userInfoDTO) {
+                String imageUri = userInfoDTO.getAvatarURI();
+                Log.i("user image uri:",imageUri);
+                storageManager.loadImageIntoImageView(getContext(),imageUri,meImage);
+            }
+        });
 
 
         //reset picture
@@ -225,7 +246,6 @@ public class MeFragment extends Fragment {
             builder.detectFileUriExposure();
         }
 
-        meImage = (ImageView) binding.imageViewme;
         meImage.setOnClickListener(new View.OnClickListener(){
             //为找到的button设置监听
             @Override
