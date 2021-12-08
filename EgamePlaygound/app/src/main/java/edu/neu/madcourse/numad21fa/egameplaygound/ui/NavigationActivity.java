@@ -14,7 +14,6 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import java.util.Date;
 import java.util.UUID;
 
 import edu.neu.madcourse.numad21fa.egameplaygound.R;
@@ -52,9 +51,6 @@ public class NavigationActivity extends AppCompatActivity implements DialogFragm
     public void onCreateTeamUpCardDialogPositiveClick(CreateTeamUpCardDialogFragment dialog) {
         Dialog dialogView = dialog.getDialog();
         EditText descriptionEt = (EditText) dialogView.findViewById(R.id.description);
-
-
-
         DatabaseManagerImpl.getInstance()
                 .getUserInfo(this, dialog.getCreatorUserUuid())
                 .observe(this, new Observer<UserInfoDTO>() {
@@ -64,7 +60,7 @@ public class NavigationActivity extends AppCompatActivity implements DialogFragm
                                 .insertTeamUpCard(new TeamUpCardDTO().setCreatorUser(userInfoDTO)
                                         .setDescription(descriptionEt.getText().toString())
                                         .setLocation(userInfoDTO.getLocation())
-                                        .setTimestamp(new Date(System.currentTimeMillis()).toString())
+                                        .setTimestamp(System.currentTimeMillis())
                                         .setUuid(UUID.randomUUID().toString()));
                         DatabaseManagerImpl.getInstance()
                                 .getUserInfo(NavigationActivity.this, dialog.getCreatorUserUuid())

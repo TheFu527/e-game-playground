@@ -1,5 +1,7 @@
 package edu.neu.madcourse.numad21fa.egameplaygound.ui.teamup;
 
+import android.icu.text.SimpleDateFormat;
+
 import edu.neu.madcourse.numad21fa.egameplaygound.constant.enums.user.UserGenderEnum;
 import edu.neu.madcourse.numad21fa.egameplaygound.constant.enums.user.UserLevelEnum;
 import edu.neu.madcourse.numad21fa.egameplaygound.model.dto.UserInfoDTO;
@@ -69,8 +71,9 @@ public class TeamUpCard {
         return this;
     }
 
-    public TeamUpCard setTimestamp(String timestamp) {
-        this.timestamp = timestamp;
+    public TeamUpCard setTimestamp(long timestamp) {
+        SimpleDateFormat fmt= new SimpleDateFormat("yy-MM-dd HH:mm");
+        this.timestamp = fmt.format(timestamp);
         return this;
     }
 
