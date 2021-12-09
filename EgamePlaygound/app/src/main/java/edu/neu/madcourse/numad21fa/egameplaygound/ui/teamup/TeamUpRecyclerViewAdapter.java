@@ -12,10 +12,13 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import edu.neu.madcourse.numad21fa.egameplaygound.R;
 import edu.neu.madcourse.numad21fa.egameplaygound.manager.storage.StorageManagerImpl;
+import edu.neu.madcourse.numad21fa.egameplaygound.model.dto.TeamUpCardDTO;
 
 public class TeamUpRecyclerViewAdapter extends RecyclerView.Adapter<TeamUpCardViewHolder> {
 
@@ -59,9 +62,17 @@ public class TeamUpRecyclerViewAdapter extends RecyclerView.Adapter<TeamUpCardVi
         return teamUpCardList.size();
     }
 
-    public void updateTeamUpCardList(final List<TeamUpCard> teamUpCardList) {
+    public void updateTeamUpCardList(final List<TeamUpCardDTO> teamUpCardDTOList) {
         this.teamUpCardList.clear();
-        this.teamUpCardList = teamUpCardList;
+        for (TeamUpCardDTO t : teamUpCardDTOList) {
+            teamUpCardList.add(new TeamUpCard()
+                    .setDescription(t.getDescription())
+                    .setTimestamp(t.getTimestamp())
+                    .setUserInfo(t.getCreatorUser())
+                    .setLocation(t.getLocation())
+                    .setUuid(t.getUuid()));
+        }
+        teamUpCardList.sort((o1, o2) -> -o1.getTimestamp().compareTo(o2.getTimestamp()));
         notifyDataSetChanged();
     }
 
@@ -78,8 +89,9 @@ public class TeamUpRecyclerViewAdapter extends RecyclerView.Adapter<TeamUpCardVi
         viewHolder.getUserGender().setImageResource(card.getUserGender().getIcon());
         viewHolder.getUserGender().setColorFilter(card.getUserGender().getColor());
         viewHolder.getContactMe().setOnClickListener(v -> {
-            Intent emailIntent = new Intent(Intent.ACTION_SEND);
-            emailIntent.setDataAndType(Uri.parse("mailto:"), "text/plain");
+            Intent emailIntent = new Intent();
+            emailIntent.setAction(Intent.ACTION_SEND);
+            emailIntent.setType("message/rfc822");
             emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{card.getUserEmail()});
             emailIntent.putExtra(Intent.EXTRA_SUBJECT, CONTACT_EMAIL_SUBJECT);
             emailIntent.putExtra(Intent.EXTRA_TEXT, CONTACT_EMAIL_TEXT);
