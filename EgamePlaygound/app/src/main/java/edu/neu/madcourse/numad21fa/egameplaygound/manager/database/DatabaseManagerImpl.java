@@ -12,7 +12,6 @@ import java.util.List;
 import edu.neu.madcourse.numad21fa.egameplaygound.model.dto.PiazzaCardDTO;
 import edu.neu.madcourse.numad21fa.egameplaygound.model.dto.TeamUpCardDTO;
 import edu.neu.madcourse.numad21fa.egameplaygound.model.dto.UserInfoDTO;
-import edu.neu.madcourse.numad21fa.egameplaygound.ui.teamup.TeamUpViewModel;
 
 public class DatabaseManagerImpl implements DatabaseManager {
     private static final DatabaseManagerImpl instance = new DatabaseManagerImpl();
