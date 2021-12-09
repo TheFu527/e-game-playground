@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModel;
 import com.google.firebase.database.DataSnapshot;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import edu.neu.madcourse.numad21fa.egameplaygound.model.dto.TeamUpCardDTO;
@@ -26,7 +27,9 @@ public class DatabaseViewModel extends ViewModel {
                 usersQueryLiveData,
                 new UsersDeserializer());
         teamUpCardsLiveData = Transformations.map(
-                new FirebaseQueryLiveData(DatabaseManagerImpl.getInstance().getTeamUpCardsRef()),
+                new FirebaseQueryLiveData(DatabaseManagerImpl.getInstance()
+                        .getTeamUpCardsRef()
+                        .orderByChild("timestamp")),
                 new TeamUpCardsDeserializer());
 
     }
@@ -90,6 +93,7 @@ public class DatabaseViewModel extends ViewModel {
             for(DataSnapshot ds : dataSnapshot.getChildren()) {
                 modelList.add(ds.getValue(TeamUpCardDTO.class));
             }
+            Collections.reverse(modelList);
             return modelList;
         }
     }
