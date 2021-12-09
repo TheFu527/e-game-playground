@@ -58,7 +58,11 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.security.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -94,6 +98,7 @@ public class MeFragment extends Fragment {
     private File currentImageFile = null;
     int MY_PERMISSIONS_WRITE_EXTERNAL_STORAGE;
     private DatabaseManager databaseManager;
+    long[] time = {0};
 
 
 
@@ -111,6 +116,19 @@ public class MeFragment extends Fragment {
 
         binding = FragmentMeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+
+        //get base time
+        SimpleDateFormat format = new SimpleDateFormat("yy-MM-dd H:m:s");
+        Date max_time = null;
+        try {
+            max_time = format.parse("2010-03-01 00:00:00");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(max_time);
+        time[0] = cal.getTimeInMillis();
+        System.out.println(time[0]);
 
 
         //get userinfo
@@ -155,13 +173,6 @@ public class MeFragment extends Fragment {
                         DatabaseReference USERS_REF = FirebaseDatabase.getInstance().getReference("/users");
                         Log.i("level got:",USERS_REF.child(uuid).child("level").getKey());
                         USERS_REF.child(uuid).child("level").setValue(levelSelected[0]);
-//                        Map<String,Object> childUpdates = new HashMap<>();
-//                        Map<String, UserLevelEnum> postValues;
-//                        postValues = new HashMap<>();
-//                        postValues.put("level", levelSelected[0]);
-//                        childUpdates.put(uuid,childUpdates);
-//                        USERS_REF.updateChildren(childUpdates);
-
                         Log.i("reset level succeed!","wow~");
                         Toast.makeText(getActivity(),"reset level successfully",Toast.LENGTH_SHORT).show();
 
@@ -179,21 +190,20 @@ public class MeFragment extends Fragment {
         databaseManager.getTeamUpCardList(this,uuid).observe(getViewLifecycleOwner(), new Observer<List<TeamUpCardDTO>>() {
             @Override
             public void onChanged(List<TeamUpCardDTO> teamUpCardDTOS) {
-                String max_time = "2010-03-01 00:00:00";
                 String Latest_des = "";
                 int flag[] = {0};
                 for (TeamUpCardDTO t : teamUpCardDTOS) {
-                    String tmp = t.getTimestamp();
+                    Long tmp = t.getTimestamp();
                     flag[0] = 1;
-                    if (max_time.compareTo(tmp)<0) {
-                        max_time = tmp;
+                    if (time[0]<tmp) {
+                        time[0] = tmp;
                         Latest_des = t.getDescription();
                     }
                 }
 
                 if(flag[0]==1){
                     teamupdesc = (TextView) binding.teamupDesc;
-                    teamupdesc.setText(" Description: "+Latest_des+"\n"+"Publish time:   "+max_time);
+                    teamupdesc.setText("Description: "+Latest_des+"\n"+"Publish timestamp:   "+transferLongToDate("yyyy-MM-dd HH:mm:ss",time[0]));
                     //
 
                     teamupdesc.setOnClickListener(new View.OnClickListener() {
@@ -233,7 +243,10 @@ public class MeFragment extends Fragment {
             public void onChanged(UserInfoDTO userInfoDTO) {
                 String imageUri = userInfoDTO.getAvatarURI();
                 Log.i("user image uri:",imageUri);
-                storageManager.loadImageIntoImageView(getContext(),imageUri,meImage);
+                int length = imageUri.split("/").length;
+                String nums = imageUri.split("/")[length-1];
+                Log.i("=======",nums);
+                storageManager.loadImageIntoImageView(getContext(),storageRef.child("user_image").child(String.valueOf(nums)),meImage);
             }
         });
 
@@ -335,10 +348,14 @@ public class MeFragment extends Fragment {
             USERS_REF.child(uuid).child("avatarURI").setValue(storageRef.child("user_image").child(StorageChild).toString());
             Log.i("reset user image succeed!","wow~");
             Toast.makeText(getActivity(),"reset user image successfully",Toast.LENGTH_SHORT).show();
-
-
         }
     }
+
+    public String transferLongToDate(String dateFormat, Long millSec) {
+        SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
+        Date date = new Date(millSec);
+        return sdf.format(date);
+        }
 
 
     @Override
