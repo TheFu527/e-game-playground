@@ -12,6 +12,8 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import edu.neu.madcourse.numad21fa.egameplaygound.R;
@@ -60,12 +62,6 @@ public class TeamUpRecyclerViewAdapter extends RecyclerView.Adapter<TeamUpCardVi
         return teamUpCardList.size();
     }
 
-//    public void updateTeamUpCardList(final List<TeamUpCard> teamUpCardList) {
-//        this.teamUpCardList.clear();
-//        this.teamUpCardList = teamUpCardList;
-//        notifyDataSetChanged();
-//    }
-
     public void updateTeamUpCardList(final List<TeamUpCardDTO> teamUpCardDTOList) {
         this.teamUpCardList.clear();
         for (TeamUpCardDTO t : teamUpCardDTOList) {
@@ -76,6 +72,7 @@ public class TeamUpRecyclerViewAdapter extends RecyclerView.Adapter<TeamUpCardVi
                     .setLocation(t.getLocation())
                     .setUuid(t.getUuid()));
         }
+        teamUpCardList.sort((o1, o2) -> -o1.getTimestamp().compareTo(o2.getTimestamp()));
         notifyDataSetChanged();
     }
 
