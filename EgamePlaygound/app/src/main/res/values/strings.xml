@@ -15,7 +15,8 @@
     <string name="card_content_pz">content</string>
     <string name="card_timestamp_pz">timestamp</string>
     <string name="create_teamup_card">Create Your Card</string>
+    <string name="create_piazza_card">Create Your Card</string>
     <string name="post">Post</string>
     <string name="cancel">Cancel</string>
-
+    <string name="title_user_piazza">User\'s Piazza</string>
 </resources>

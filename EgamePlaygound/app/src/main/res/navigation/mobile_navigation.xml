@@ -34,4 +34,10 @@
         android:name="edu.neu.madcourse.numad21fa.egameplaygound.ui.teamup.UserTeamUpFragment"
         android:label="@string/title_user_teamup"
         tools:layout="@layout/fragment_user_teamup" />
+
+    <fragment
+        android:id="@+id/navigation_user_piazza"
+        android:name="edu.neu.madcourse.numad21fa.egameplaygound.ui.piazza.UserPiazzaFragment"
+        android:label="@string/title_user_piazza"
+        tools:layout="@layout/fragment_user_piazza" />
 </navigation>

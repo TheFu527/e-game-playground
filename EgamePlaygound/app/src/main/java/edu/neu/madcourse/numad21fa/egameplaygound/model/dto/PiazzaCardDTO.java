@@ -5,7 +5,7 @@ public class PiazzaCardDTO {
     private String title;
     private String content;
     private UserInfoDTO creatorUser;
-    private String timestamp;
+    private long timestamp;
 
     public PiazzaCardDTO() {
     }
@@ -46,11 +46,11 @@ public class PiazzaCardDTO {
         return this;
     }
 
-    public String getTimestamp() {
+    public long getTimestamp() {
         return timestamp;
     }
 
-    public PiazzaCardDTO setTimestamp(String timestamp) {
+    public PiazzaCardDTO setTimestamp(long timestamp) {
         this.timestamp = timestamp;
         return this;
     }

@@ -124,6 +124,7 @@ public class DatabaseViewModel extends ViewModel {
             for(DataSnapshot ds : dataSnapshot.getChildren()) {
                 modelList.add(ds.getValue(PiazzaCardDTO.class));
             }
+            Collections.reverse(modelList);
             return modelList;
         }
     }
