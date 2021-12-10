@@ -8,77 +8,149 @@ tools:context=".ui.me.MeFragment">
 
     <ImageView
         android:id="@+id/imageViewme"
-        android:layout_width="94dp"
-        android:layout_height="85dp"
-        android:layout_marginTop="84dp"
+        android:layout_width="122dp"
+        android:layout_height="133dp"
+        android:layout_marginTop="16dp"
         android:adjustViewBounds="false"
         android:onClick="onClick"
         android:padding="3dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.025"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_launcher_background" />
+        app:srcCompat="@drawable/ic_me_black_24dp" />
+
+
+    <ImageView
+        android:id="@+id/user_level_icon"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:adjustViewBounds="false"
+        android:padding="1dp"
+        app:layout_constraintStart_toEndOf="@+id/imageViewme"
+        app:layout_constraintTop_toBottomOf="@+id/location"
+        app:layout_constraintVertical_bias="0.166"
+        app:srcCompat="@drawable/ic_master_24dp" />
+
+    <ImageView
+        android:id="@+id/location_icon"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="20dp"
+        android:adjustViewBounds="false"
+        android:padding="1dp"
+        app:layout_constraintBottom_toTopOf="@+id/userlevel"
+        app:layout_constraintStart_toEndOf="@+id/imageViewme"
+        app:layout_constraintTop_toBottomOf="@+id/username_me"
+        app:srcCompat="@drawable/ic_baseline_location_on_24" />
+
+    <ImageView
+        android:id="@+id/gender_icon"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:adjustViewBounds="false"
+        android:padding="1dp"
+        app:layout_constraintBottom_toTopOf="@+id/location"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/username_me"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_man_24dp" />
 
     <TextView
         android:id="@+id/username_me"
         android:layout_width="208dp"
         android:layout_height="43dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="104dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="16dp"
         android:text="username"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintStart_toEndOf="@+id/imageViewme"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/teamup_desc"
+        android:layout_width="360dp"
+        android:layout_height="67dp"
+        android:background="@drawable/common_google_signin_btn_icon_dark_normal_background"
+        android:onClick="onClick"
+        android:text=""
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/newestteamup" />
+
+    <TextView
+        android:id="@+id/piazza_desc"
+        android:layout_width="360dp"
+        android:layout_height="67dp"
+        android:background="@drawable/common_google_signin_btn_icon_dark_normal_background"
+        android:onClick="onClick"
+        android:text=""
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/newestpiazza"
+        app:layout_constraintVertical_bias="0.0" />
+
+
+    <TextView
+        android:id="@+id/newestteamup"
+        android:layout_width="229dp"
+        android:layout_height="47dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="76dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Newest Teamup"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider" />
 
     <TextView
         android:id="@+id/newestpiazza"
         android:layout_width="232dp"
         android:layout_height="56dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="76dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="64dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Newest_Piazza"
+        android:text="Newest Piazza"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/reset_level_spinner" />
+        app:layout_constraintTop_toBottomOf="@+id/teamup_desc" />
 
     <TextView
-        android:id="@+id/newestteamup"
-        android:layout_width="232dp"
-        android:layout_height="56dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="100dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Newest_Teamup"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/newestpiazza" />
-
-    <Spinner
-        android:id="@+id/reset_level_spinner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="212dp"
-        android:entries="@array/user_level"
-        android:minHeight="48dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/reset_level"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="212dp"
-        android:onClick="onClick"
-        android:text="Reset_level"
-        app:layout_constraintBottom_toTopOf="@+id/newestpiazza"
+        android:id="@+id/location"
+        android:layout_width="79dp"
+        android:layout_height="27dp"
+        android:layout_marginTop="16dp"
+        android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.32"
-        app:layout_constraintStart_toEndOf="@+id/reset_level_spinner"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        app:rippleColor="@color/white"
-        app:strokeColor="#1E2729" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/location_icon"
+        app:layout_constraintTop_toBottomOf="@+id/username_me" />
+
+    <TextView
+        android:id="@+id/userlevel"
+        android:layout_width="127dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        android:onClick="onClick"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/user_level_icon"
+        app:layout_constraintTop_toBottomOf="@+id/location" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="409dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="36dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintTop_toBottomOf="@+id/userlevel"
+        tools:layout_editor_absoluteX="1dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

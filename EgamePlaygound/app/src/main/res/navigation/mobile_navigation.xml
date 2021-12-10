@@ -18,6 +18,12 @@
         tools:layout="@layout/fragment_piazza" />
 
     <fragment
+        android:id="@+id/navigation_resetlevel"
+        android:name="edu.neu.madcourse.numad21fa.egameplaygound.ui.me.resetLevelFragment"
+        android:label="reset level"
+        tools:layout="@layout/fragment_reset_level" />
+
+    <fragment
         android:id="@+id/navigation_teamup"
         android:name="edu.neu.madcourse.numad21fa.egameplaygound.ui.teamup.TeamUpFragment"
         android:label="@string/title_teamup"
