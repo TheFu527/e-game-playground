@@ -144,7 +144,7 @@ public class MeFragment extends Fragment {
 
         } catch(Exception e){
             uuid = auth.getUserID();
-            Log.i("get arguments successsfully","wow");
+            Log.i("get arguments failed","wow");
 
         }
 
@@ -191,6 +191,7 @@ public class MeFragment extends Fragment {
         });
 
         //read newest teamup
+        teamupdesc = (TextView) binding.teamupDesc;
         databaseManager.getTeamUpCardList(this,uuid).observe(getViewLifecycleOwner(), new Observer<List<TeamUpCardDTO>>() {
             @Override
             public void onChanged(List<TeamUpCardDTO> teamUpCardDTOS) {
@@ -206,9 +207,7 @@ public class MeFragment extends Fragment {
                 }
 
                 if(flag[0]==1){
-                    teamupdesc = (TextView) binding.teamupDesc;
                     teamupdesc.setText("Description: "+Latest_des+"\n"+"Publish timestamp:   "+transferLongToDate("yyyy-MM-dd HH:mm:ss",time[0]));
-                    //
 
                     teamupdesc.setOnClickListener(new View.OnClickListener() {
                         //为找到的button设置监听
@@ -230,7 +229,6 @@ public class MeFragment extends Fragment {
                 }
             }
         });
-        teamupdesc = (TextView) binding.teamupDesc;
         teamupdesc.setOnClickListener(new View.OnClickListener() {
             //为找到的button设置监听
             @Override
@@ -241,6 +239,7 @@ public class MeFragment extends Fragment {
 
 
         //read newest piazza
+        piazzadesc = (TextView) binding.piazzaDesc;
         databaseManager.getPiazzaCardList(this,uuid).observe(getViewLifecycleOwner(), new Observer<List<PiazzaCardDTO>>() {
             @Override
             public void onChanged(List<PiazzaCardDTO> PiazzaCardDTOS) {
@@ -256,9 +255,7 @@ public class MeFragment extends Fragment {
                 }
 
                 if(flag[0]==1){
-                    piazzadesc = (TextView) binding.piazzaDesc;
                     piazzadesc.setText("Context: "+Latest_des+"\n"+"Publish timestamp:   "+transferLongToDate("yyyy-MM-dd HH:mm:ss",time[0]));
-                    //
 
                     piazzadesc.setOnClickListener(new View.OnClickListener() {
                         //为找到的button设置监听
@@ -280,7 +277,6 @@ public class MeFragment extends Fragment {
                 }
             }
         });
-        piazzadesc = (TextView) binding.piazzaDesc;
         piazzadesc.setOnClickListener(new View.OnClickListener() {
             //为找到的button设置监听
             @Override
