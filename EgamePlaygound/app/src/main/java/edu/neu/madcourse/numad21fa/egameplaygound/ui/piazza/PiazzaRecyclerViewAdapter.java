@@ -80,7 +80,7 @@ public class PiazzaRecyclerViewAdapter extends RecyclerView.Adapter<PiazzaCardVi
         viewHolder.getContent().setText(card.getContent());
         viewHolder.getTime().setText(card.getTimestamp());
         StorageManagerImpl.getInstance()
-                .loadImageIntoImageView(viewHolder.itemView.getContext(),
+                .loadImageIntoImageView(viewHolder.getUserAvatar().getContext(),
                         card.getUserAvatar(), viewHolder.getUserAvatar());
         viewHolder.getUserLevel().setImageResource(card.getUserLevel().getIcon());
         viewHolder.getUserLevel().setColorFilter(card.getUserLevel().getColor());
