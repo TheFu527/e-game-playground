@@ -3,12 +3,14 @@ package edu.neu.madcourse.numad21fa.egameplaygound.ui.teamup;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -104,6 +106,10 @@ public class TeamUpRecyclerViewAdapter extends RecyclerView.Adapter<TeamUpCardVi
                         Toast.LENGTH_SHORT).show();
             }
         });
-
+        Bundle myCardBundle = new Bundle();
+        myCardBundle.putString("uuid", card.getUserUuid());
+        viewHolder.itemView
+                .setOnClickListener(Navigation.createNavigateOnClickListener(
+                        R.id.navigation_me, myCardBundle));
     }
 }
