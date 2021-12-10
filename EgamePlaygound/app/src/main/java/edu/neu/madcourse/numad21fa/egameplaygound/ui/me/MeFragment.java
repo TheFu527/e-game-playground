@@ -77,6 +77,7 @@ import edu.neu.madcourse.numad21fa.egameplaygound.manager.database.DatabaseManag
 import edu.neu.madcourse.numad21fa.egameplaygound.manager.database.DatabaseViewModel;
 import edu.neu.madcourse.numad21fa.egameplaygound.manager.storage.StorageManager;
 import edu.neu.madcourse.numad21fa.egameplaygound.manager.storage.StorageManagerImpl;
+import edu.neu.madcourse.numad21fa.egameplaygound.model.dto.PiazzaCardDTO;
 import edu.neu.madcourse.numad21fa.egameplaygound.model.dto.TeamUpCardDTO;
 import edu.neu.madcourse.numad21fa.egameplaygound.model.dto.UserInfoDTO;
 import edu.neu.madcourse.numad21fa.egameplaygound.ui.MainActivity;
@@ -87,14 +88,18 @@ public class MeFragment extends Fragment {
 
     private MeViewModel meViewModel;
     private FragmentMeBinding binding;
-    private Button setlevel;
     private  TextView teamupdesc;
+    private TextView piazzadesc;
     private String uname;
+    private UserInfoDTO user;
+    private ImageView gender_icon;
+    private ImageView level_icon;
+    private TextView location;
+    private  TextView level;
     String uuid;
     private ImageView meImage;
-    private Spinner reset_level_spinner;
+
     private FirebaseAuth mAuth;
-    final UserLevelEnum[] levelSelected = {UserLevelEnum.SILVER};
     private File currentImageFile = null;
     int MY_PERMISSIONS_WRITE_EXTERNAL_STORAGE;
     private DatabaseManager databaseManager;
@@ -106,9 +111,9 @@ public class MeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
+
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageRef = storage.getReference();
-        StorageManager storageManager = StorageManagerImpl.getInstance();
         databaseManager = DatabaseManagerImpl.getInstance();
 
         meViewModel =
@@ -131,60 +136,59 @@ public class MeFragment extends Fragment {
         System.out.println(time[0]);
 
 
-        //get userinfo
+        //get uuid
         Authentication auth = AuthenticationImpl.getInstance();
-        String email = auth.getUser().getEmail();
-        uname = "";
-        if (email!=null){
-            uname  = email.split("@")[0];
+        try {
+            uuid = requireArguments().getString("uuid");
+            Log.i("get arguments successsfully","wow");
+
+        } catch(Exception e){
+            uuid = auth.getUserID();
+            Log.i("get arguments successsfully","wow");
+
         }
-        Log.i("uname:",uname);
-        uuid = auth.getUserID();
-        Log.i("uuid:",uuid);
 
-        //set username
+
+        //update user info
+        meImage = (ImageView) binding.imageViewme;
         final TextView user_name = binding.usernameMe;
-        meViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        gender_icon = binding.genderIcon;
+        level = binding.userlevel;
+        level_icon = binding.userLevelIcon;
+        databaseManager.getUserInfo(this,uuid).observe(getViewLifecycleOwner(), new Observer<UserInfoDTO>() {
             @Override
-            public void onChanged(@Nullable String s) {
-                user_name.setText(uname);
+            public void onChanged(UserInfoDTO userInfoDTO) {
+                String imageUri = userInfoDTO.getAvatarURI();
+                Log.i("user image uri:",imageUri);
+
+                StorageManager storageManager = StorageManagerImpl.getInstance();
+                storageManager.loadImageIntoImageView(getContext(),imageUri,meImage);
+
+                location.setText(userInfoDTO.getLocation());
+                level.setText(userInfoDTO.getLevel().toString());
+                level_icon.setImageResource(userInfoDTO.getLevel().getIcon());
+                level_icon.setColorFilter(userInfoDTO.getLevel().getColor());
+                gender_icon.setImageResource(userInfoDTO.getGender().getIcon());
+                gender_icon.setColorFilter(userInfoDTO.getGender().getColor());
+                user_name.setText(userInfoDTO.getName());
+
             }
         });
 
-
-        //get level
-        reset_level_spinner = (Spinner) binding.resetLevelSpinner;
-        List<UserLevelEnum> levelList = Arrays.asList(UserLevelEnum.MASTER,UserLevelEnum.GOLD,UserLevelEnum.SILVER,UserLevelEnum.UNKNOWN);
-
-        ArrayAdapter<UserLevelEnum> resetLevelAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item,UserLevelEnum.values());
-        reset_level_spinner.setAdapter(resetLevelAdapter);
-
-        reset_level_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                levelSelected[0] = levelList.get(i);
-                //set level
-                setlevel = (Button) binding.resetLevel;
-                setlevel.setOnClickListener(new View.OnClickListener(){
-                    //为找到的button设置监听
-                    @Override
-                    //重写onClick函数
-                    public void onClick(View v){
-                        DatabaseReference USERS_REF = FirebaseDatabase.getInstance().getReference("/users");
-                        Log.i("level got:",USERS_REF.child(uuid).child("level").getKey());
-                        USERS_REF.child(uuid).child("level").setValue(levelSelected[0]);
-                        Log.i("reset level succeed!","wow~");
-                        Toast.makeText(getActivity(),"reset level successfully",Toast.LENGTH_SHORT).show();
-
-                    }
-                });
+        //level image click
+        level.setOnClickListener(v -> {
+            if(uuid==auth.getUserID()){
+                Bundle myCardBundle = new Bundle();
+                myCardBundle.putString("uuid", uuid);
+                NavHostFragment.findNavController(MeFragment.this)
+                        .navigate(R.id.navigation_resetlevel, myCardBundle);
             }
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
+            else
+            {
+                Toast.makeText(getContext(),"You can only change your own level",Toast.LENGTH_SHORT).show();
             }
+
         });
-        Log.i("selected level:",levelSelected[0].toString());
-
 
         //read newest teamup
         databaseManager.getTeamUpCardList(this,uuid).observe(getViewLifecycleOwner(), new Observer<List<TeamUpCardDTO>>() {
@@ -236,17 +240,52 @@ public class MeFragment extends Fragment {
         });
 
 
-        //update user image
-        meImage = (ImageView) binding.imageViewme;
-        databaseManager.getUserInfo(this,uuid).observe(getViewLifecycleOwner(), new Observer<UserInfoDTO>() {
+        //read newest piazza
+        databaseManager.getPiazzaCardList(this,uuid).observe(getViewLifecycleOwner(), new Observer<List<PiazzaCardDTO>>() {
             @Override
-            public void onChanged(UserInfoDTO userInfoDTO) {
-                String imageUri = userInfoDTO.getAvatarURI();
-                Log.i("user image uri:",imageUri);
-                int length = imageUri.split("/").length;
-                String nums = imageUri.split("/")[length-1];
-                Log.i("=======",nums);
-                storageManager.loadImageIntoImageView(getContext(),storageRef.child("user_image").child(String.valueOf(nums)),meImage);
+            public void onChanged(List<PiazzaCardDTO> PiazzaCardDTOS) {
+                String Latest_des = "";
+                int flag[] = {0};
+                for (PiazzaCardDTO t : PiazzaCardDTOS) {
+                    Long tmp = t.getTimestamp();
+                    flag[0] = 1;
+                    if (time[0]<tmp) {
+                        time[0] = tmp;
+                        Latest_des = t.getContent();
+                    }
+                }
+
+                if(flag[0]==1){
+                    piazzadesc = (TextView) binding.piazzaDesc;
+                    piazzadesc.setText("Context: "+Latest_des+"\n"+"Publish timestamp:   "+transferLongToDate("yyyy-MM-dd HH:mm:ss",time[0]));
+                    //
+
+                    piazzadesc.setOnClickListener(new View.OnClickListener() {
+                        //为找到的button设置监听
+                        @Override
+                        //重写onClick函数
+                        public void onClick(View v) {
+                            if(flag[0]==1){
+                                Log.i("flag value:",String.valueOf(flag[0]));
+                                Bundle myCardBundle = new Bundle();
+                                myCardBundle.putString("uuid", uuid);
+                                NavHostFragment.findNavController(MeFragment.this).navigate(R.id.navigation_user_piazza, myCardBundle);
+                            }
+                            else {
+                                Toast.makeText(getContext(),"No teamup card till now!",Toast.LENGTH_SHORT).show();
+                            }
+
+                        }
+                    });
+                }
+            }
+        });
+        piazzadesc = (TextView) binding.piazzaDesc;
+        piazzadesc.setOnClickListener(new View.OnClickListener() {
+            //为找到的button设置监听
+            @Override
+            //重写onClick函数
+            public void onClick(View v) {
             }
         });
 
