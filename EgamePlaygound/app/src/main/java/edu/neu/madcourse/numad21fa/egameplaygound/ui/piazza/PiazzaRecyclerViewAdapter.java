@@ -10,6 +10,10 @@ import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -80,7 +84,7 @@ public class PiazzaRecyclerViewAdapter extends RecyclerView.Adapter<PiazzaCardVi
         viewHolder.getContent().setText(card.getContent());
         viewHolder.getTime().setText(card.getTimestamp());
         StorageManagerImpl.getInstance()
-                .loadImageIntoImageView(viewHolder.itemView.getContext(),
+                .loadImageIntoImageView(viewHolder.getUserAvatar().getContext(),
                         card.getUserAvatar(), viewHolder.getUserAvatar());
         viewHolder.getUserLevel().setImageResource(card.getUserLevel().getIcon());
         viewHolder.getUserLevel().setColorFilter(card.getUserLevel().getColor());

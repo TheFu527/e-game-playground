@@ -36,8 +36,10 @@ public class StorageManagerImpl implements StorageManager {
 
     @Override
     public void loadImageIntoImageView(Context context, String imageRef, ImageView imageView) {
+        String path = imageRef.substring(imageRef.lastIndexOf("/", imageRef.lastIndexOf("/") - 1) + 1); // get "user_image/xxx.xxx"
+        StorageReference realImageRef = storage.getReference().child(path);
         Glide.with(context)
-                .load(imageRef)
+                .load(realImageRef)
                 .into(imageView);
     }
 
