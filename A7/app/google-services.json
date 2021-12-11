@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "72287081170",
+    "firebase_url": "https://a7-sticker-default-rtdb.firebaseio.com",
+    "project_id": "a7-sticker",
+    "storage_bucket": "a7-sticker.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:72287081170:android:89f396462aeb65b412130b",
+        "android_client_info": {
+          "package_name": "edu.neu.madcourse.a7"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "72287081170-4d8m7jfgmu3aqapdgq7hb9b1v8c2f4k4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDaZKXDUsT1Et4eJQMhmutlFdk2XHoXC6c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "72287081170-4d8m7jfgmu3aqapdgq7hb9b1v8c2f4k4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
