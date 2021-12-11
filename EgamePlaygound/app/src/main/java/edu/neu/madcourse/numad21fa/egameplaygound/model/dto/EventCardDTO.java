@@ -4,8 +4,8 @@ public class EventCardDTO {
     private String uuid;
     private String team1;
     private String team2;
-    private String teamscore1;
-    private String teamscore2;
+    private String team1score;
+    private String team2score;
     private long timestamp;
 
     public EventCardDTO() {
@@ -39,21 +39,21 @@ public class EventCardDTO {
     }
 
     public EventCardDTO setTeamscore1(String team) {
-        this.teamscore1 = team;
+        this.team1score = team;
         return this;
     }
 
     public String getTeamscore1() {
-        return teamscore1;
+        return team1score;
     }
 
     public EventCardDTO setTeamscore2(String team) {
-        this.teamscore1 = team;
+        this.team2score = team;
         return this;
     }
 
     public String getTeamscore2() {
-        return teamscore2;
+        return team2score;
     }
 
     public long getTimestamp() {
