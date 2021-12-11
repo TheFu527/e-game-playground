@@ -14,10 +14,12 @@ import java.util.List;
 
 import edu.neu.madcourse.numad21fa.egameplaygound.model.dto.PiazzaCardDTO;
 import edu.neu.madcourse.numad21fa.egameplaygound.model.dto.TeamUpCardDTO;
+import edu.neu.madcourse.numad21fa.egameplaygound.model.dto.EventCardDTO;
 import edu.neu.madcourse.numad21fa.egameplaygound.model.dto.UserInfoDTO;
 
 public class DatabaseViewModel extends ViewModel {
     private final LiveData<List<UserInfoDTO>> usersLiveData;
+    private final LiveData<List<EventCardDTO>> eventCardsLiveData;
     private final LiveData<List<TeamUpCardDTO>> teamUpCardsLiveData;
     private final LiveData<List<PiazzaCardDTO>> piazzaCardsLiveData;
     private final FirebaseQueryLiveData usersQueryLiveData;
@@ -36,6 +38,9 @@ public class DatabaseViewModel extends ViewModel {
         piazzaCardsLiveData = Transformations.map(
                 new FirebaseQueryLiveData(DatabaseManagerImpl.getInstance().getPiazzaCardsRef()),
                 new PiazzaCardsDeserializer());
+        eventCardsLiveData = Transformations.map(
+                new FirebaseQueryLiveData(DatabaseManagerImpl.getInstance().getEventCardsRef()),
+                new EventCardsDeserializer());
     }
 
     @NonNull
@@ -51,6 +56,11 @@ public class DatabaseViewModel extends ViewModel {
     @NonNull
     public LiveData<List<PiazzaCardDTO>> getPiazzaCardsLiveData() {
         return piazzaCardsLiveData;
+    }
+
+    @NonNull
+    public LiveData<List<EventCardDTO>> getEventCardsLiveData() {
+        return eventCardsLiveData;
     }
 
     @NonNull
@@ -72,6 +82,15 @@ public class DatabaseViewModel extends ViewModel {
                         .equalTo(uuid)),
                 new PiazzaCardsDeserializer());
     }
+
+    @NonNull
+    public LiveData<List<EventCardDTO>> getEventCardsLiveData(String uuid) {
+        return Transformations.map(
+                new FirebaseQueryLiveData(DatabaseManagerImpl.getInstance()
+                        .getEventCardsRef()
+                        .orderByChild("creatorUser/uuid")
+                        .equalTo(uuid)),
+                new EventCardsDeserializer());    }
 
     @NonNull
     public LiveData<UserInfoDTO> getUserInfoLiveData(String uuid) {
@@ -123,6 +142,18 @@ public class DatabaseViewModel extends ViewModel {
             List<PiazzaCardDTO> modelList= new ArrayList<>();
             for(DataSnapshot ds : dataSnapshot.getChildren()) {
                 modelList.add(ds.getValue(PiazzaCardDTO.class));
+            }
+            Collections.reverse(modelList);
+            return modelList;
+        }
+    }
+
+    private static class EventCardsDeserializer implements  Function<DataSnapshot, List<EventCardDTO>> {
+        @Override
+        public List<EventCardDTO> apply(DataSnapshot dataSnapshot) {
+            List<EventCardDTO> modelList= new ArrayList<>();
+            for(DataSnapshot ds : dataSnapshot.getChildren()) {
+                modelList.add(ds.getValue(EventCardDTO.class));
             }
             Collections.reverse(modelList);
             return modelList;
