@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_events">
+
+    <fragment
+        android:id="@+id/navigation_events"
+        android:name="edu.neu.madcourse.numad21fa.egameplaygound.ui.events.EventsFragment"
+        android:label="@string/title_events"
+        tools:layout="@layout/fragment_events" />
+
+    <fragment
+        android:id="@+id/navigation_piazza"
+        android:name="edu.neu.madcourse.numad21fa.egameplaygound.ui.piazza.PiazzaFragment"
+        android:label="@string/title_piazza"
+        tools:layout="@layout/fragment_piazza" />
+
+    <fragment
+        android:id="@+id/navigation_resetlevel"
+        android:name="edu.neu.madcourse.numad21fa.egameplaygound.ui.me.resetLevelFragment"
+        android:label="reset level"
+        tools:layout="@layout/fragment_reset_level" />
+
+    <fragment
+        android:id="@+id/navigation_teamup"
+        android:name="edu.neu.madcourse.numad21fa.egameplaygound.ui.teamup.TeamUpFragment"
+        android:label="@string/title_teamup"
+        tools:layout="@layout/fragment_teamup" />
+
+    <fragment
+        android:id="@+id/navigation_me"
+        android:name="edu.neu.madcourse.numad21fa.egameplaygound.ui.me.MeFragment"
+        android:label="@string/title_me"
+        tools:layout="@layout/fragment_me" />
+
+    <fragment
+        android:id="@+id/navigation_user_teamup"
+        android:name="edu.neu.madcourse.numad21fa.egameplaygound.ui.teamup.UserTeamUpFragment"
+        android:label="@string/title_user_teamup"
+        tools:layout="@layout/fragment_user_teamup" />
+
+    <fragment
+        android:id="@+id/navigation_user_piazza"
+        android:name="edu.neu.madcourse.numad21fa.egameplaygound.ui.piazza.UserPiazzaFragment"
+        android:label="@string/title_user_piazza"
+        tools:layout="@layout/fragment_user_piazza" />
+</navigation>

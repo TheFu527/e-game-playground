@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="user_level">
+        <item>SILVER</item>
+        <item>GOLD</item>
+        <item>MASTER</item>
+        <item>UNKNOWN</item>
+    </string-array>
+
+    <string-array name="user_gender">
+        <item>MALE</item>
+        <item>FEMALE</item>
+        <item>UNKNOWN</item>
+    </string-array>
+</resources>

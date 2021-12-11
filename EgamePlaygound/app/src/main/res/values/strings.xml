@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">EgamePlaygound</string>
+    <string name="title_activity_navigation">NavigationActivity</string>
+    <string name="title_events">Event News</string>
+    <string name="title_piazza">Piazza</string>
+    <string name="title_teamup">Team Up</string>
+    <string name="title_user_teamup">User\'s Team Up</string>
+    <string name="title_me">Me</string>
+    <string name="card_location">Beijing</string>
+    <string name="card_user_name">Hao Fu</string>
+    <string name="card_description">We need a teammate.</string>
+    <string name="card_timestamp">timestamp</string>
+    <string name="card_user_name_pz">ingbol</string>
+    <string name="card_title_pz">title</string>
+    <string name="card_content_pz">content</string>
+    <string name="card_timestamp_pz">timestamp</string>
+    <string name="create_teamup_card">Create Your Card</string>
+    <string name="create_piazza_card">Create Your Card</string>
+    <string name="post">Post</string>
+    <string name="cancel">Cancel</string>
+    <string name="title_user_piazza">User\'s Piazza</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
