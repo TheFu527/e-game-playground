@@ -1,5 +1,7 @@
 package edu.neu.madcourse.numad21fa.egameplaygound.ui.me;
 
+import static java.lang.Thread.sleep;
+
 import android.Manifest;
 import android.app.Activity;
 import android.content.ContentUris;
@@ -105,6 +107,8 @@ public class MeFragment extends Fragment {
     int MY_PERMISSIONS_WRITE_EXTERNAL_STORAGE;
     private DatabaseManager databaseManager;
     long[] time = {0};
+    private StorageReference storageRef;
+    private StorageManager storageManager;
 
 
 
@@ -114,8 +118,10 @@ public class MeFragment extends Fragment {
 
 
         FirebaseStorage storage = FirebaseStorage.getInstance();
-        StorageReference storageRef = storage.getReference();
+        storageRef = storage.getReference();
         databaseManager = DatabaseManagerImpl.getInstance();
+        storageManager = StorageManagerImpl.getInstance();
+
 
         meViewModel =
                 new ViewModelProvider(this).get(MeViewModel.class);
@@ -380,9 +386,6 @@ public class MeFragment extends Fragment {
         {
             meImage.setImageURI(Uri.fromFile(currentImageFile));
             Log.i("image uri:",Uri.fromFile(currentImageFile).toString());
-            StorageManager storageManager = StorageManagerImpl.getInstance();
-            FirebaseStorage storage = FirebaseStorage.getInstance();
-            StorageReference storageRef = storage.getReference();
 
             //upload image to storage
             String StorageChild = String.valueOf(System.currentTimeMillis());
@@ -394,6 +397,21 @@ public class MeFragment extends Fragment {
             USERS_REF.child(uuid).child("avatarURI").setValue(storageRef.child("user_image").child(StorageChild).toString());
             Log.i("reset user image succeed!","wow~");
             Toast.makeText(getActivity(),"reset user image successfully",Toast.LENGTH_SHORT).show();
+
+            //reload image from realtime database
+            try {
+                sleep(3000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            databaseManager.getUserInfo(this,uuid).observe(getViewLifecycleOwner(), new Observer<UserInfoDTO>() {
+                @Override
+                public void onChanged(UserInfoDTO userInfoDTO) {
+                    String imageUri = userInfoDTO.getAvatarURI();
+                    Log.i("user image uri:",imageUri);
+                    storageManager.loadImageIntoImageView(getContext(),imageUri,meImage);
+                }
+            });
         }
     }
 
