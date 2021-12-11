@@ -31,4 +31,5 @@ public interface DatabaseManager {
     LiveData<UserInfoDTO> getUserInfo(ViewModelStoreOwner owner, String uuid);
     LiveData<List<PiazzaCardDTO>> getPiazzaCardList(ViewModelStoreOwner owner, String uuid);
     LiveData<List<EventCardDTO>> getEventCardList(ViewModelStoreOwner owner, String uuid);
+
 }

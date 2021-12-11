@@ -110,5 +110,4 @@ public class DatabaseManagerImpl implements DatabaseManager {
     public LiveData<List<EventCardDTO>> getEventCardList(ViewModelStoreOwner owner, String uuid) {
         return new ViewModelProvider(owner).get(DatabaseViewModel.class).getEventCardsLiveData(uuid);
     }
-
 }

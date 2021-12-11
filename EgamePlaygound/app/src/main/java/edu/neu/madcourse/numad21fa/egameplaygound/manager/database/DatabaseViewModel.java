@@ -158,5 +158,4 @@ public class DatabaseViewModel extends ViewModel {
             return modelList;
         }
     }
-
 }
