@@ -42,7 +42,6 @@ public class DatabaseViewModel extends ViewModel {
                 new FirebaseQueryLiveData(DatabaseManagerImpl.getInstance().getEventCardsRef()),
                 new EventCardsDeserializer());
     }
-
     @NonNull
     public LiveData<List<UserInfoDTO>> getUsersLiveData() {
         return usersLiveData;
@@ -159,4 +158,5 @@ public class DatabaseViewModel extends ViewModel {
             return modelList;
         }
     }
+
 }
