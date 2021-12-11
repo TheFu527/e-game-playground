@@ -68,6 +68,7 @@ import java.util.List;
 import java.util.Map;
 
 import edu.neu.madcourse.numad21fa.egameplaygound.R;
+import edu.neu.madcourse.numad21fa.egameplaygound.constant.enums.user.UserGenderEnum;
 import edu.neu.madcourse.numad21fa.egameplaygound.constant.enums.user.UserLevelEnum;
 import edu.neu.madcourse.numad21fa.egameplaygound.databinding.FragmentMeBinding;
 import edu.neu.madcourse.numad21fa.egameplaygound.manager.authentication.Authentication;
@@ -155,22 +156,32 @@ public class MeFragment extends Fragment {
         gender_icon = binding.genderIcon;
         level = binding.userlevel;
         level_icon = binding.userLevelIcon;
+        location = binding.location;
         databaseManager.getUserInfo(this,uuid).observe(getViewLifecycleOwner(), new Observer<UserInfoDTO>() {
             @Override
             public void onChanged(UserInfoDTO userInfoDTO) {
                 String imageUri = userInfoDTO.getAvatarURI();
                 Log.i("user image uri:",imageUri);
+                String location_value = "Boston";
+                location_value = userInfoDTO.getLocation();
+                UserLevelEnum level_value = UserLevelEnum.UNKNOWN;
+                level_value = userInfoDTO.getLevel();
+                UserGenderEnum gender_value = UserGenderEnum.UNKNOWN;
+                gender_value = userInfoDTO.getGender();
+                String username = userInfoDTO.getName();
 
                 StorageManager storageManager = StorageManagerImpl.getInstance();
                 storageManager.loadImageIntoImageView(getContext(),imageUri,meImage);
 
-                location.setText(userInfoDTO.getLocation());
-                level.setText(userInfoDTO.getLevel().toString());
-                level_icon.setImageResource(userInfoDTO.getLevel().getIcon());
-                level_icon.setColorFilter(userInfoDTO.getLevel().getColor());
-                gender_icon.setImageResource(userInfoDTO.getGender().getIcon());
-                gender_icon.setColorFilter(userInfoDTO.getGender().getColor());
-                user_name.setText(userInfoDTO.getName());
+                if(location_value != null) {
+                    location.setText(location_value);
+                    level.setText(level_value.toString());
+                    level_icon.setImageResource(level_value.getIcon());
+                    level_icon.setColorFilter(level_value.getColor());
+                    gender_icon.setImageResource(gender_value.getIcon());
+                    gender_icon.setColorFilter(gender_value.getColor());
+                    user_name.setText(username);
+                }
 
             }
         });

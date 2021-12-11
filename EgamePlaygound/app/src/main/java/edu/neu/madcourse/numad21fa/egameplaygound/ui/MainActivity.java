@@ -9,6 +9,8 @@ import java.net.URI;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -31,6 +33,7 @@ import edu.neu.madcourse.numad21fa.egameplaygound.model.dto.UserInfoDTO;
 import edu.neu.madcourse.numad21fa.egameplaygound.ui.login.LoginActivity;
 
 public class MainActivity extends AppCompatActivity {
+    private Button login;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,10 +58,15 @@ public class MainActivity extends AppCompatActivity {
 //        dbManager.insertTeamUpCard(teamUpCardDTO);
 
 
-        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-        startActivity(intent);
+        login = findViewById(R.id.login);
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intent);
 
-
+            }
+        });
 
     }
 }
