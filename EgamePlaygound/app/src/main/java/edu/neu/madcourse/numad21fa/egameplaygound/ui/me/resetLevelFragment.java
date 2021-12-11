@@ -1,7 +1,10 @@
 package edu.neu.madcourse.numad21fa.egameplaygound.ui.me;
 
+import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -41,7 +44,7 @@ public class resetLevelFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
-    private Button setlevel;
+    public Button setlevel;
     private Spinner reset_level_spinner;
     final UserLevelEnum[] levelSelected = {UserLevelEnum.SILVER};
     private FragmentResetLevelBinding binding;
@@ -75,9 +78,9 @@ public class resetLevelFragment extends Fragment {
 
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    @RequiresApi(api = Build.VERSION_CODES.GINGERBREAD)
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentResetLevelBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
@@ -87,6 +90,7 @@ public class resetLevelFragment extends Fragment {
         String uuid = auth.getUserID();
 
         //get level
+        setlevel = (Button) binding.resetLevel;
         reset_level_spinner = (Spinner) binding.resetLevelSpinner;
         List<UserLevelEnum> levelList = Arrays.asList(UserLevelEnum.SILVER,UserLevelEnum.GOLD,UserLevelEnum.MASTER,UserLevelEnum.UNKNOWN);
 
@@ -98,7 +102,6 @@ public class resetLevelFragment extends Fragment {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 levelSelected[0] = levelList.get(i);
                 //set level
-                setlevel = (Button) binding.resetLevel;
                 setlevel.setOnClickListener(new View.OnClickListener(){
                     //为找到的button设置监听
                     @Override
@@ -118,8 +121,21 @@ public class resetLevelFragment extends Fragment {
             }
         });
         Log.i("selected level:",levelSelected[0].toString());
-        return inflater.inflate(R.layout.fragment_reset_level, container, false);
+        //set level
+        setlevel.setOnClickListener(new View.OnClickListener(){
+            //为找到的button设置监听
+            @Override
+            //重写onClick函数
+            public void onClick(View v){
+            }
+        });
+//        return inflater.inflate(R.layout.fragment_reset_level, container, false);
+        return root;
+    }
 
-
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 }

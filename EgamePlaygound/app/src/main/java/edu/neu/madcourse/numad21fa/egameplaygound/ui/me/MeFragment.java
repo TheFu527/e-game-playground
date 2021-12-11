@@ -1,5 +1,7 @@
 package edu.neu.madcourse.numad21fa.egameplaygound.ui.me;
 
+import static java.lang.Thread.sleep;
+
 import android.Manifest;
 import android.app.Activity;
 import android.content.ContentUris;
@@ -68,6 +70,7 @@ import java.util.List;
 import java.util.Map;
 
 import edu.neu.madcourse.numad21fa.egameplaygound.R;
+import edu.neu.madcourse.numad21fa.egameplaygound.constant.enums.user.UserGenderEnum;
 import edu.neu.madcourse.numad21fa.egameplaygound.constant.enums.user.UserLevelEnum;
 import edu.neu.madcourse.numad21fa.egameplaygound.databinding.FragmentMeBinding;
 import edu.neu.madcourse.numad21fa.egameplaygound.manager.authentication.Authentication;
@@ -104,6 +107,8 @@ public class MeFragment extends Fragment {
     int MY_PERMISSIONS_WRITE_EXTERNAL_STORAGE;
     private DatabaseManager databaseManager;
     long[] time = {0};
+    private StorageReference storageRef;
+    private StorageManager storageManager;
 
 
 
@@ -113,8 +118,10 @@ public class MeFragment extends Fragment {
 
 
         FirebaseStorage storage = FirebaseStorage.getInstance();
-        StorageReference storageRef = storage.getReference();
+        storageRef = storage.getReference();
         databaseManager = DatabaseManagerImpl.getInstance();
+        storageManager = StorageManagerImpl.getInstance();
+
 
         meViewModel =
                 new ViewModelProvider(this).get(MeViewModel.class);
@@ -144,7 +151,7 @@ public class MeFragment extends Fragment {
 
         } catch(Exception e){
             uuid = auth.getUserID();
-            Log.i("get arguments successsfully","wow");
+            Log.i("get arguments failed","wow");
 
         }
 
@@ -155,22 +162,32 @@ public class MeFragment extends Fragment {
         gender_icon = binding.genderIcon;
         level = binding.userlevel;
         level_icon = binding.userLevelIcon;
+        location = binding.location;
         databaseManager.getUserInfo(this,uuid).observe(getViewLifecycleOwner(), new Observer<UserInfoDTO>() {
             @Override
             public void onChanged(UserInfoDTO userInfoDTO) {
                 String imageUri = userInfoDTO.getAvatarURI();
                 Log.i("user image uri:",imageUri);
+                String location_value = "Boston";
+                location_value = userInfoDTO.getLocation();
+                UserLevelEnum level_value = UserLevelEnum.UNKNOWN;
+                level_value = userInfoDTO.getLevel();
+                UserGenderEnum gender_value = UserGenderEnum.UNKNOWN;
+                gender_value = userInfoDTO.getGender();
+                String username = userInfoDTO.getName();
 
                 StorageManager storageManager = StorageManagerImpl.getInstance();
                 storageManager.loadImageIntoImageView(getContext(),imageUri,meImage);
 
-                location.setText(userInfoDTO.getLocation());
-                level.setText(userInfoDTO.getLevel().toString());
-                level_icon.setImageResource(userInfoDTO.getLevel().getIcon());
-                level_icon.setColorFilter(userInfoDTO.getLevel().getColor());
-                gender_icon.setImageResource(userInfoDTO.getGender().getIcon());
-                gender_icon.setColorFilter(userInfoDTO.getGender().getColor());
-                user_name.setText(userInfoDTO.getName());
+                if(location_value != null) {
+                    location.setText(location_value);
+                    level.setText(level_value.toString());
+                    level_icon.setImageResource(level_value.getIcon());
+                    level_icon.setColorFilter(level_value.getColor());
+                    gender_icon.setImageResource(gender_value.getIcon());
+                    gender_icon.setColorFilter(gender_value.getColor());
+                    user_name.setText(username);
+                }
 
             }
         });
@@ -191,6 +208,7 @@ public class MeFragment extends Fragment {
         });
 
         //read newest teamup
+        teamupdesc = (TextView) binding.teamupDesc;
         databaseManager.getTeamUpCardList(this,uuid).observe(getViewLifecycleOwner(), new Observer<List<TeamUpCardDTO>>() {
             @Override
             public void onChanged(List<TeamUpCardDTO> teamUpCardDTOS) {
@@ -206,9 +224,7 @@ public class MeFragment extends Fragment {
                 }
 
                 if(flag[0]==1){
-                    teamupdesc = (TextView) binding.teamupDesc;
                     teamupdesc.setText("Description: "+Latest_des+"\n"+"Publish timestamp:   "+transferLongToDate("yyyy-MM-dd HH:mm:ss",time[0]));
-                    //
 
                     teamupdesc.setOnClickListener(new View.OnClickListener() {
                         //为找到的button设置监听
@@ -230,7 +246,6 @@ public class MeFragment extends Fragment {
                 }
             }
         });
-        teamupdesc = (TextView) binding.teamupDesc;
         teamupdesc.setOnClickListener(new View.OnClickListener() {
             //为找到的button设置监听
             @Override
@@ -241,6 +256,7 @@ public class MeFragment extends Fragment {
 
 
         //read newest piazza
+        piazzadesc = (TextView) binding.piazzaDesc;
         databaseManager.getPiazzaCardList(this,uuid).observe(getViewLifecycleOwner(), new Observer<List<PiazzaCardDTO>>() {
             @Override
             public void onChanged(List<PiazzaCardDTO> PiazzaCardDTOS) {
@@ -256,9 +272,7 @@ public class MeFragment extends Fragment {
                 }
 
                 if(flag[0]==1){
-                    piazzadesc = (TextView) binding.piazzaDesc;
                     piazzadesc.setText("Context: "+Latest_des+"\n"+"Publish timestamp:   "+transferLongToDate("yyyy-MM-dd HH:mm:ss",time[0]));
-                    //
 
                     piazzadesc.setOnClickListener(new View.OnClickListener() {
                         //为找到的button设置监听
@@ -280,7 +294,6 @@ public class MeFragment extends Fragment {
                 }
             }
         });
-        piazzadesc = (TextView) binding.piazzaDesc;
         piazzadesc.setOnClickListener(new View.OnClickListener() {
             //为找到的button设置监听
             @Override
@@ -373,9 +386,6 @@ public class MeFragment extends Fragment {
         {
             meImage.setImageURI(Uri.fromFile(currentImageFile));
             Log.i("image uri:",Uri.fromFile(currentImageFile).toString());
-            StorageManager storageManager = StorageManagerImpl.getInstance();
-            FirebaseStorage storage = FirebaseStorage.getInstance();
-            StorageReference storageRef = storage.getReference();
 
             //upload image to storage
             String StorageChild = String.valueOf(System.currentTimeMillis());
@@ -387,6 +397,21 @@ public class MeFragment extends Fragment {
             USERS_REF.child(uuid).child("avatarURI").setValue(storageRef.child("user_image").child(StorageChild).toString());
             Log.i("reset user image succeed!","wow~");
             Toast.makeText(getActivity(),"reset user image successfully",Toast.LENGTH_SHORT).show();
+
+            //reload image from realtime database
+            try {
+                sleep(3000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            databaseManager.getUserInfo(this,uuid).observe(getViewLifecycleOwner(), new Observer<UserInfoDTO>() {
+                @Override
+                public void onChanged(UserInfoDTO userInfoDTO) {
+                    String imageUri = userInfoDTO.getAvatarURI();
+                    Log.i("user image uri:",imageUri);
+                    storageManager.loadImageIntoImageView(getContext(),imageUri,meImage);
+                }
+            });
         }
     }
 

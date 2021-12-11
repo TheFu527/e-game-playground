@@ -251,7 +251,8 @@ public class SignupActivity extends AppCompatActivity
                                     .setLevel(levelSelected[0])
                                     .setLocation(cityName)
                                     .setUuid(uid)
-                                    .setName(email.split("@")[0]);
+                                    .setName(email.split("@")[0])
+                                    .setTokenid(user.getIdToken(false).toString());
                             dbManager.insertUser(userDTO);
                             Toast.makeText(SignupActivity.this,"Create account successfully!",Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(SignupActivity.this, NavigationActivity.class);
