@@ -30,6 +30,7 @@ import edu.neu.madcourse.numad21fa.egameplaygound.manager.database.DatabaseManag
 import edu.neu.madcourse.numad21fa.egameplaygound.model.dto.PiazzaCardDTO;
 import edu.neu.madcourse.numad21fa.egameplaygound.model.dto.TeamUpCardDTO;
 import edu.neu.madcourse.numad21fa.egameplaygound.model.dto.UserInfoDTO;
+import edu.neu.madcourse.numad21fa.egameplaygound.model.dto.EventCardDTO;
 import edu.neu.madcourse.numad21fa.egameplaygound.ui.login.LoginActivity;
 
 public class MainActivity extends AppCompatActivity {

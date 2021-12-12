@@ -21,4 +21,6 @@
     <string name="title_user_piazza">User\'s Piazza</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="teamname2">team2</string>
+    <string name="teamname1">team1</string>
 </resources>

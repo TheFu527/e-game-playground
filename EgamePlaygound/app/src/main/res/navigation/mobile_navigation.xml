@@ -9,7 +9,7 @@
         android:id="@+id/navigation_events"
         android:name="edu.neu.madcourse.numad21fa.egameplaygound.ui.events.EventsFragment"
         android:label="@string/title_events"
-        tools:layout="@layout/fragment_events" />
+        tools:layout="@layout/event_card" />
 
     <fragment
         android:id="@+id/navigation_piazza"
@@ -46,4 +46,6 @@
         android:name="edu.neu.madcourse.numad21fa.egameplaygound.ui.piazza.UserPiazzaFragment"
         android:label="@string/title_user_piazza"
         tools:layout="@layout/fragment_user_piazza" />
+
+
 </navigation>
