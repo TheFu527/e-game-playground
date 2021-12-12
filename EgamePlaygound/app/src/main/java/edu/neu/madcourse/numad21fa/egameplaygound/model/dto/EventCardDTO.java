@@ -1,5 +1,7 @@
 package edu.neu.madcourse.numad21fa.egameplaygound.model.dto;
 
+import java.net.URI;
+
 public class EventCardDTO {
     private String uuid;
     private String team1;
@@ -8,6 +10,7 @@ public class EventCardDTO {
     private String team2score;
     private String team1Icon;
     private String team2Icon;
+    private URI matchURI;
     private long timestamp;
 
     public String getTeam1() {

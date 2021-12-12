@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import edu.neu.madcourse.numad21fa.egameplaygound.R;
+import edu.neu.madcourse.numad21fa.egameplaygound.databinding.FragmentEventBinding;
 import edu.neu.madcourse.numad21fa.egameplaygound.databinding.FragmentTeamupBinding;
 import edu.neu.madcourse.numad21fa.egameplaygound.manager.authentication.AuthenticationImpl;
 import edu.neu.madcourse.numad21fa.egameplaygound.manager.database.DatabaseManager;
@@ -21,7 +22,7 @@ import edu.neu.madcourse.numad21fa.egameplaygound.manager.database.DatabaseManag
 
 public class EventsFragment extends Fragment {
 
-    private FragmentTeamupBinding binding;
+    private FragmentEventBinding binding;
     private RecyclerView teamUpRecyclerView;
     private EventRecyclerViewAdapter adapter;
     private RecyclerView.LayoutManager rLayoutManger;
@@ -34,11 +35,11 @@ public class EventsFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         databaseManager = DatabaseManagerImpl.getInstance();
 
-        binding = FragmentTeamupBinding.inflate(inflater, container, false);
+        binding = FragmentEventBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         initRecyclerView();
-        initMyCardButton();
+        // initMyCardButton();
 
         return root;
     }
@@ -51,7 +52,7 @@ public class EventsFragment extends Fragment {
 
     private void initRecyclerView() {
         rLayoutManger = new LinearLayoutManager(getContext());
-        teamUpRecyclerView = binding.cardRecyclerView;
+        teamUpRecyclerView = binding.eventCardRecyclerView;
         adapter = new EventRecyclerViewAdapter();
         teamUpRecyclerView.setAdapter(adapter);
         teamUpRecyclerView.setLayoutManager(rLayoutManger);
@@ -59,13 +60,13 @@ public class EventsFragment extends Fragment {
                 EventCardDTOs -> adapter.updateEventCardList(EventCardDTOs));
     }
 
-    private void initMyCardButton() {
-        myCard = binding.myCardButton;
-        myCard.setOnClickListener(v -> {
-            Bundle myCardBundle = new Bundle();
-            myCardBundle.putString("uuid", AuthenticationImpl.getInstance().getUserID());
-            NavHostFragment.findNavController(EventsFragment.this)
-                    .navigate(R.id.navigation_user_teamup, myCardBundle);
-        });
-    }
+//    private void initMyCardButton() {
+//        myCard = binding.myEventButton;
+//        myCard.setOnClickListener(v -> {
+//            Bundle myCardBundle = new Bundle();
+//            myCardBundle.putString("uuid", AuthenticationImpl.getInstance().getUserID());
+//            NavHostFragment.findNavController(EventsFragment.this)
+//                    .navigate(R.id.navigation_user_teamup, myCardBundle);
+//        });
+//    }
 }

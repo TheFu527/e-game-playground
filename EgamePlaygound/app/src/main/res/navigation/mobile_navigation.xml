@@ -9,7 +9,7 @@
         android:id="@+id/navigation_events"
         android:name="edu.neu.madcourse.numad21fa.egameplaygound.ui.events.EventsFragment"
         android:label="@string/title_events"
-        tools:layout="@layout/event_card" />
+        tools:layout="@layout/fragment_event" />
 
     <fragment
         android:id="@+id/navigation_piazza"
