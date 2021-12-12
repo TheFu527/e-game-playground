@@ -79,7 +79,7 @@ public class SignupActivity extends AppCompatActivity
 
 
         //get level
-        List<UserLevelEnum> levelList = Arrays.asList(UserLevelEnum.MASTER,UserLevelEnum.GOLD,UserLevelEnum.SILVER,UserLevelEnum.UNKNOWN);
+        List<UserLevelEnum> levelList = Arrays.asList(UserLevelEnum.SILVER,UserLevelEnum.GOLD,UserLevelEnum.MASTER,UserLevelEnum.UNKNOWN);
 
         level = (Spinner) findViewById(R.id.user_level);
         ArrayAdapter<UserLevelEnum> levelAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,UserLevelEnum.values() );
