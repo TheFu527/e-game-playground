@@ -54,18 +54,6 @@
             android:textSize="15sp"
             android:textStyle="bold" />
 
-        <Button
-            android:id="@+id/visit_website_button"
-            style="?android:attr/borderlessButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="76dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="0dp"
-            android:text="Visit website"
-            android:textColor="@android:color/holo_blue_dark" />
-
         <TextView
             android:id="@+id/card_timestamp_event"
             android:layout_width="wrap_content"
