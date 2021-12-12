@@ -8,4 +8,6 @@ public interface DialogFragmentListener {
     void onCreateTeamUpCardDialogNegativeClick(CreateTeamUpCardDialogFragment dialog);
     void onCreatePiazzaCardDialogPositiveClick(CreatePiazzaCardDialogFragment dialog);
     void onCreatePiazzaCardDialogNegativeClick(CreatePiazzaCardDialogFragment dialog);
+//    void onCreateEventCardDialogPositiveClick(CreateEventCardDialogFragment dialog);
+//    void onCreateEventCardDialogNegativeClick(CreateEventCardDialogFragment dialog);
 }

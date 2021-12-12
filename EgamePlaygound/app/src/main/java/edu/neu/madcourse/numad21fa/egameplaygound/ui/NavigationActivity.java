@@ -21,9 +21,12 @@ import edu.neu.madcourse.numad21fa.egameplaygound.databinding.ActivityNavigation
 import edu.neu.madcourse.numad21fa.egameplaygound.manager.database.DatabaseManagerImpl;
 import edu.neu.madcourse.numad21fa.egameplaygound.model.dto.PiazzaCardDTO;
 import edu.neu.madcourse.numad21fa.egameplaygound.model.dto.TeamUpCardDTO;
+import edu.neu.madcourse.numad21fa.egameplaygound.model.dto.EventCardDTO;
 import edu.neu.madcourse.numad21fa.egameplaygound.model.dto.UserInfoDTO;
 import edu.neu.madcourse.numad21fa.egameplaygound.ui.piazza.CreatePiazzaCardDialogFragment;
 import edu.neu.madcourse.numad21fa.egameplaygound.ui.teamup.CreateTeamUpCardDialogFragment;
+import edu.neu.madcourse.numad21fa.egameplaygound.ui.events.CreateEventCardDialogFragment;
+
 
 public class NavigationActivity extends AppCompatActivity implements DialogFragmentListener {
 
@@ -105,4 +108,32 @@ public class NavigationActivity extends AppCompatActivity implements DialogFragm
         Snackbar.make(findViewById(R.id.container), "Post Piazza Card Canceled", Snackbar.LENGTH_SHORT)
                 .show();
     }
+
+//    @Override
+//    public void onCreateEventCardDialogPositiveClick(CreateEventCardDialogFragment dialog) {
+//        Dialog dialogView = dialog.getDialog();
+//        EditText titleEt = (EditText) dialogView.findViewById(R.id.title);
+//        EditText contentEt = (EditText) dialogView.findViewById(R.id.content);
+//        DatabaseManagerImpl.getInstance()
+//                .getUserInfo(this, dialog.getCreatorUserUuid())
+//                .observe(this, new Observer<UserInfoDTO>() {
+//                    @Override
+//                    public void onChanged(UserInfoDTO userInfoDTO) {
+//                        DatabaseManagerImpl.getInstance()
+//                                .insertPiazzaCard(new PiazzaCardDTO().setCreatorUser(userInfoDTO)
+//                                        .setTitle(titleEt.getText().toString())
+//                                        .setContent(contentEt.getText().toString())
+//                                        .setTimestamp(System.currentTimeMillis())
+//                                        .setUuid(UUID.randomUUID().toString()));
+//                        DatabaseManagerImpl.getInstance()
+//                                .getUserInfo(NavigationActivity.this, dialog.getCreatorUserUuid())
+//                                .removeObserver(this);
+//                    }
+//                });
+
+//    @Override
+//    public void onCreateEventCardDialogNegativeClick(CreateEventCardDialogFragment dialog) {
+//        Snackbar.make(findViewById(R.id.container), "Post Piazza Card Canceled", Snackbar.LENGTH_SHORT)
+//                .show();
+//    }
 }
