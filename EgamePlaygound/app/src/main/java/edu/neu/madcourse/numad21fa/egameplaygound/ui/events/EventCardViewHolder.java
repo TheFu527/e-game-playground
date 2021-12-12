@@ -17,7 +17,7 @@ public class EventCardViewHolder extends RecyclerView.ViewHolder {
     private final TextView score1;
     private final TextView score2;
     private final TextView card_timestamp_event;
-    private final Button visit_website_button;
+    // private final Button visit_website_button;
 
     public EventCardViewHolder(View view) {
         super(view);
@@ -29,7 +29,7 @@ public class EventCardViewHolder extends RecyclerView.ViewHolder {
         score1 = (TextView) view.findViewById(R.id.score1);
         score2 = (TextView) view.findViewById(R.id.score2);
         card_timestamp_event = (TextView) view.findViewById(R.id.card_timestamp_event);
-        visit_website_button = (Button) view.findViewById(R.id.visit_website_button);
+        // visit_website_button = (Button) view.findViewById(R.id.visit_website_button);
 
     }
 
